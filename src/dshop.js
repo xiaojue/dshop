@@ -14,79 +14,52 @@
  * 自测无误后再提交svn到测试机测试，之后没问题了再发布上线。
  */
 (function(W,$){
-    
-    var dshop={};
 
-    dshop.queue=[];
-    dshop.queueflg=false;
-    dshop._mods={};
-    dshop.mods={};
-    dshop.plug='http://localhost/idmstatic/js/dshop/src/jQplug/';
-    
-    dshop.add=function(name,mod){
-      if(dshop._mods.hasOwnProperty(name)) return;
-      dshop._mods[name]=mod;
-    }
-
-    dshop.use=function(name,callback,required){
-      var canbeuse=false,T1,T2;
-      if(required){
-        for(var i=0;i<required.length;i++){
-          var requiredname=required[i],
-              requiredfile=dshop.plug+'jquery.'+requiredname+'.js';
-              if(dshop._mods.hasOwnProperty(requiredname)) continue;
-              (function(j,l,name){
-                 $.getScript(requiredfile,function(){
-                    dshop.queue.push(dshop._mods[name]);
-                    if(j==l) dshop.queueflg=true;
-                 });
-              })(i,required.length-1,requiredname)
-        }
-
-         T1=setInterval(function(){
-          if(dshop.queueflg){
-            clearInterval(T1);
-            dshop.queueflg=false;
-             for(var i=0;i<dshop.queue.length;i++) dshop.queue[i]();
-             dshop.queue=[];
-             canbeuse=true;
-            }
-          },100);
-      }else{
-        canbeuse=true;
-      }
-      if(dshop.mods.hasOwnProperty(name)){
-        callback();
-      }else{
-        var file=dshop.plug+'jquery.'+name+'.js';
-        T2=setInterval(function(){
-          if(canbeuse){
-            clearInterval(T2)
-            $.getScript(file,function(){
-                dshop._mods[name]();
-                callback();
-                dshop._mods={};
-            });
-          }
-        },100);
-      }
+    var dependfix=function(host){
+      this._queue=[];
+      this._queuefn={};
+      this.mods={};
+      this.host=host;
     };
 
+    dependfix.prototype={
+      add:function(name,mod){
+        var that=this;  
+        if(that._queuefn.hasOwnProperty(name)) return;
+        that._queuefn[name]=mod;
+      },
+      use:function(name,callback,required){
+      var that=this;
+      if(that._queuefn.hasOwnProperty(name)){
+        callback(); 
+      }else{
+        var list=[name];
+        if(required) list=list.concat(required);
+        for(var i=0;i<list.length;i++){
+          var modname=list[i],
+          file=that.host+'jquery.'+modname+'.js';
+          if(that._queuefn.hasOwnProperty(modname)) continue;
+          (function(modname,index){
+              $.getScript(file,function(){
+                  that._queue[index]=that._queuefn[modname];
+                  if(that.queue.length==list.length){
+                    for(var j=0;j<that._queue.length;j++){
+                      that._queue[j]();
+                    }
+                    callback();
+                    that._queue=[];
+                  }
+                }); 
+            })(modname,i)
+        }
+      }
+      }
+    }
+
+    var host='http://localhost/idmstatic/js/dshop/',
+        dshop=new dependfix(host+'src/jQplug/'),
+        dshopmods=new dependfix(host+'src/mods/');
+    
     W.dshop=dshop;
-
+    W.dshopmods=dshopmods;
 })(window,jQuery);
-
-dshop.use('test',function(){
-    console.log('end')
-    dshop.mods.test();
-    dshop.use('test',function(){
-        console.log('retest')
-      })
-    dshop.use('test2',function(){
-        console.log('retest2');
-      })
-    dshop.use('test3',function(){
-        console.log('retest3');
-      },['test','test2'])
-},['test3','test2']);
-
