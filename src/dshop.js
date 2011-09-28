@@ -63,7 +63,3 @@
     W.dshop=dshop;
     W.dshopmods=dshopmods;
 })(window,jQuery);
-
-dshop.use('test',function(){
-    dshop.mods.test();
-},['test3','test2']);
