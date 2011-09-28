@@ -37,12 +37,12 @@
         if(required) list=list.concat(required);
         for(var i=0;i<list.length;i++){
           var modname=list[i],
-          file=that.host+'jquery.'+modname+'.js';
+          file=that.host+modname+'/'+modname+'.js';
           if(that._queuefn.hasOwnProperty(modname)) continue;
           (function(modname,index){
               $.getScript(file,function(){
                   that._queue[index]=that._queuefn[modname];
-                  if(that.queue.length==list.length){
+                  if(that._queue.length==list.length){
                     for(var j=0;j<that._queue.length;j++){
                       that._queue[j]();
                     }
@@ -63,3 +63,7 @@
     W.dshop=dshop;
     W.dshopmods=dshopmods;
 })(window,jQuery);
+
+dshop.use('test',function(){
+    dshop.mods.test();
+},['test3','test2']);
