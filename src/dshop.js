@@ -50,7 +50,7 @@
                     that._queue=[];
                   }
                 }); 
-            })(modname,i)
+            })(modname,i);
         }
       }
       }
