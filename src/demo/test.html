@@ -2,9 +2,17 @@
   <head>
     <title>test</title>
     <script src="http://s1.ifiter.com/static/GM/jquery/jquery-1.6.2.min.js"></script>
-    <script src="..\..\src\dshop.js"></script>
+    <script src="http://localhost/idmstatic/js/dshop/src/dshop.js"></script>
+    
   </head>
   <body>
-  
+    <textarea id="J_Editor" style="width:500px;height:200px;"></textarea>
+    <script>
+      (function(){
+        dshop.use('editor',function(){
+          dshop.mods.editor('Myeditor').init('#J_Editor');
+        },['loadcss']);
+      })(); 
+    </script> 
   </body>
 </html>

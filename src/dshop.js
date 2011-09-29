@@ -31,7 +31,7 @@
       use:function(name,callback,required){
       var that=this;
       if(that._queuefn.hasOwnProperty(name)){
-        callback(); 
+        if(callback) callback(); 
       }else{
         var list=[name];
         if(required) list=list.concat(required);
@@ -46,7 +46,7 @@
                     for(var j=0;j<that._queue.length;j++){
                       that._queue[j]();
                     }
-                    callback();
+                    if(callback) callback();
                     that._queue=[];
                   }
                 }); 
@@ -57,10 +57,10 @@
     }
 
     var host='http://localhost/idmstatic/js/dshop/',
-        dshop=new dependfix(host+'src/jQplug/'),
+        dshop=new dependfix(host+'src/plug/'),
         dshopmods=new dependfix(host+'src/mods/');
+    //要用社区的js的时候,直接引这个http://s1.ifiter.com/static/GM/bulid/GM-min.js?t=20110915.js
+    //社区里的tools部分会不断重写到plug里
     W.dshop=dshop;
     W.dshopmods=dshopmods;
-    //要用社区的js的时候,直接引这个http://s1.ifiter.com/static/GM/bulid/GM-min.js?t=20110915.js
-    //社区里的tools部分会不断重写到jQplug里
 })(window,jQuery);
