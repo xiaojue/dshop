@@ -56,11 +56,12 @@
       }
     }
 
-    var host='http://localhost/idmstatic/js/dshop/',
-        dshop=new dependfix(host+'src/plug/'),
-        dshopmods=new dependfix(host+'src/mods/');
+    var host='http://localhost/idmstatic/js/dshop/src/',
+        dshop=new dependfix(host+'plug/'),
+        dshopmods=new dependfix(host+'mods/');
     //要用社区的js的时候,直接引这个http://s1.ifiter.com/static/GM/bulid/GM-min.js?t=20110915.js
     //社区里的tools部分会不断重写到plug里
     W.dshop=dshop;
     W.dshopmods=dshopmods;
+    W.dshop.host=host;
 })(window,jQuery);
