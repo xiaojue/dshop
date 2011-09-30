@@ -40,9 +40,7 @@
 
           return {
               init:function(textarea){
-                $.ajaxSetup({cache:true});
                 initkissy(function(){
-                    $.ajaxSetup({cache:false});
                     $(function(){
                         var base = 'http://a.tbcdn.cn/s/kissy/1.1.7/';
                             KISSY.Config.base = base;

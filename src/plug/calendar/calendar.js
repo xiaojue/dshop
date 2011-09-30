@@ -15,13 +15,7 @@
             if(!calendar.loaded){
                 calendar.loaded=true;
                 var yuimin='http://yui.yahooapis.com/3.4.1/build/yui/yui-min.js';
-                $.ajaxSetup({
-                    cache:false
-                  });
                 $.getScript(yuimin,function(){
-                      $.ajaxSetup({
-                        cache:true
-                      });
                     yuicalendar();
                   });
             }else{

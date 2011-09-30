@@ -60,4 +60,13 @@
     //社区里的tools部分会不断重写到plug里
     W.dshop=dshop;
     W.dshopmods=dshopmods;
+    //关闭ajax缓存,需要时自行开启，然后再自行关闭
+    $.ajaxSetup({
+        cache:false
+    });
+    //加载HTML5.js,如果浏览器为ie则加载
+    if($.browser.msie){
+      var html5js='http://a.tbcdn.cn/p/fp/2011a/html5.js';
+      $.getScript(html5js);
+    }
 })(window,jQuery);
