@@ -9,46 +9,55 @@
         var lazyload=function(cg){
           var that=this,
             _cg={
-            placeholder:dshop.base+"plug/lazyload/gray.gif",
             attr:'data-lazyload',
-            cls:'J_lazyload',
-            effect:'show',
-            threshold:'200',
-            autowrap:null //不设置的话，滚动到哪里都不会执行懒加载，必须在初始化的时候指定,类型是数组[]
+            target:'.J_lazyload',
+            effect:'slow',
+            threshold:0, //距离窗口下部 200px的时候就加载
+            auto:false, //不设置的话，滚动到哪里都不会执行懒加载，必须在初始化的时候指定,类型是数组[]
+            customfn:null
           }
           if(cg) $.extend(_cg,cg);
           $.each(_cg,function(key,val){
               that[key]=val;
             });
-          
-          if(!lazyload.isbind){
-             $(window).bind('scroll',function(){
-                 $.each(lazyload.queue,function(inedx,fn){
-                     if(fn) fn();
-                 });
-             });
-             lazyload.isbind=true;
-          }
 
+          var _fnfired;
+         
+          $(window).bind('scroll',function(){
+               that.lazyfn(that.target,function(ele){
+                  if(that.auto) that.drawimg(ele);
+                  if(that.customfn && !_fnfired){
+                    that.customfn(ele);
+                    _fnfired=true;
+                  }
+               });
+          });
         }
 
-        lazyload.queue=[]; //一个函数数组，保存window的scroll事件列队，滚动都出发同一个列队，事件只绑定一次
-        lazyload.isbind=false;
 
         lazyload.prototype={
-            //把一个区域的img的data-src换成src
-            drawimg:function(wrap){
-                
+            init:function(){
+              var that=this;  
+              $(that.target).each(function(){
+                  $(this).hide();
+              });
             },
-            //滚动到threshold懒执行某个函数
-            lazyfn:function(threshold){
-               //每次实例化和触发都是往queue列队中加函数     
+            //把一个img的data-src换成src
+            drawimg:function(ele){
+              var that=this;
+              if(!!$(ele).attr(that.attr)){
+                 var realsrc=$(ele).attr(that.attr);
+                 $(ele).attr('src',realsrc); 
+                 $(ele).fadeIn(that.effect);
+               }
             },
-            //进行scroll的初始化,对autowrap指定的容器，进行滚动条监听处理
-            scrollinit:function(){
-              if(autowrap){
-                //每次实例化和触发都是往queue列队中加函数     
-              }
+            lazyfn:function(wrap,callback){
+              var that=this,windowT=$(window).scrollTop(),windowH=$(window).height();
+              $(wrap).each(function(index,ele){
+                if($(this).offset().top-windowT-windowH<=that.threshold){
+                   callback(this);
+                }
+              });
             }
         }
 

@@ -1,0 +1,34 @@
+<html>
+  <head>
+    <title>test</title>
+    <script src="http://s1.ifiter.com/static/GM/jquery/jquery-1.6.2.min.js"></script>
+    <script src="http://localhost/idmstatic/js/dshop/src/dshop.js"></script>
+    
+  </head>
+  <body>
+    <div style="height:1000px;"></div>
+    <div><img data-lazyload="http://www.cnblogs.com/Skins/nature/images/top.gif" class="J_lazyload"></div>
+    <div style="height:500px;"></div>
+    <div id="abc">321</div>
+    <script>
+      (function(){
+        dshop.use('lazyload',function(){
+          
+          var test=new dshop.mods.lazyload({
+            auto:true
+          });
+          
+          test.init();
+
+          var test2=new dshop.mods.lazyload({
+            target:'#abc',
+            customfn:function(ele){
+              console.log(ele)
+            }
+          });
+
+        });
+      })(); 
+    </script> 
+  </body>
+</html>

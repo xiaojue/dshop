@@ -5,9 +5,6 @@
  * 并且按照固定的方式引入与书写。mods放置不同的具体项目文件，可以单独引入一个mod，也可以使用list方法，引入多个mods.建议
  * 使用异步引入，让ui无阻塞,本文件也提供debug功能，在url中包含debug字眼，即可引入非min的文件，并且支持本地调试，请先用fiddler
  * 代理这个文件，修改你的ip地址与本地项目路径……
- * ps:鉴于时间紧，项目多，商城项目允许引入第三方编写的jquery插件，但是在引入之前，需要review code，并且修改加载和应用时的接口。
- * 统一的jquery插件，和模块化的mods，也可以被社区所引用和调用，届时会在gm/seed.js中体现，社区的widget，tools，apps同样也可以被
- * 商城所调用。
  * 社区里如果需要增加tools，不建议再在tools文件夹中新增，直接扩展到jqplug中，供所有人使用
  *
  * bulid.bat和bulid.xml是打包文件和脚本，本地需要安装ant和java，还有yuicompress,建议本地使用git管理自己的项目和分支。
@@ -63,5 +60,4 @@
     //社区里的tools部分会不断重写到plug里
     W.dshop=dshop;
     W.dshopmods=dshopmods;
-    W.dshop.host=host;
 })(window,jQuery);
