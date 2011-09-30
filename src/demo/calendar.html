@@ -1,0 +1,38 @@
+<html>
+  <head>
+    <title>test</title>
+    <script src="http://s1.ifiter.com/static/GM/jquery/jquery-1.6.2.min.js"></script>
+    <script src="http://localhost/idmstatic/js/dshop/src/dshop.js"></script>
+    
+  </head>
+  <body>
+    <div class="yui3-skin-sam">
+      <div id="J_Calendar1"></div>  
+      <div id="J_Calendar2"></div> 
+    </div>
+    <script>
+      (function(){
+        dshop.use('calendar',function(){
+          dshop.mods.calendar(function(calendar,YUI){
+            var test1=new calendar({
+              contentBox: "#J_Calendar1",
+              width:'350px',
+              showPrevMonth: true,
+              showNextMonth: true,
+              date: new Date(2011, 07, 01)
+            }).render();
+          });
+          dshop.mods.calendar(function(calendar,YUI){
+            var test2=new calendar({
+              contentBox: "#J_Calendar2",
+              width:'350px',
+              showPrevMonth: true,
+              showNextMonth: true,
+              date: new Date(2011, 07, 01)
+            }).render();
+          });
+        });
+      })(); 
+    </script> 
+  </body>
+</html>
