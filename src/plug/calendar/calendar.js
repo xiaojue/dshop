@@ -29,7 +29,7 @@
           function yuicalendar(){
             YUI().use('calendar','datatype-date',function(Y){
                 calendar.core=Y.Calendar;
-                callback(calendar.core);
+                callback(calendar.core,Y);
             });
           }
           
