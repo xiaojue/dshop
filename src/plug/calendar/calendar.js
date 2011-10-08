@@ -11,29 +11,32 @@
 
           var that=this;
          //先载入yui3的资源 
-          function loadyuicalendar(){
+          function loadcalendar(){
             if(!calendar.loaded){
                 calendar.loaded=true;
-                var yuimin='http://yui.yahooapis.com/3.4.1/build/yui/yui-min.js';
-                $.getScript(yuimin,function(){
-                    yuicalendar();
+                var kissymin='http://a.tbcdn.cn/s/kissy/1.1.7/kissy-min.js';
+                $.getScript(kissymin,function(){
+                    kissycalendar();
                   });
             }else{
               setTimeout(function(){
                 if(calendar.core) callback(calendar.core);
-                else loadyuicalendar();
+                else loadcalendar();
               },1);
             }
           }
           
-          function yuicalendar(){
-            YUI().use('calendar','datatype-date',function(Y){
-                calendar.core=Y.Calendar;
-                callback(calendar.core,Y);
+          function kissycalendar(){
+            dshop.mods['loadcss'](dshop.host+'calendar/base-min.css');
+            var base = 'http://a.tbcdn.cn/s/kissy/1.1.7/';
+            KISSY.Config.base = base;
+            KISSY.use('calendar',function(S){
+                calendar.core=S.Calendar;
+                callback(calendar.core,S);
             });
           }
           
-          loadyuicalendar();
+          loadcalendar();
 
         };
 
