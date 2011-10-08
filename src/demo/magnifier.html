@@ -1,0 +1,30 @@
+<html>
+  <head>
+    <title>test</title>
+    <script src="http://s1.ifiter.com/static/GM/jquery/jquery-1.6.2.min.js"></script>
+    <script src="http://localhost/idmstatic/js/dshop/src/dshop.js"></script>
+    
+  </head>
+  <body>
+    <div>
+      <img src="http://img03.taobaocdn.com/bao/uploaded/i3/T1fftwXf8jXXX7ps79_073021.jpg_310x310.jpg" alt="test" id="abc" />
+    </div>
+    <script>
+      (function(){
+        dshop.use('magnifier',function(){
+          dshop.mods['magnifier'](function(zoom,KISSY){
+            var test1=new zoom({
+              imageNode:'#abc',
+              align:{
+                node:'#abc',
+                points:['tr','tl'],
+                offset:[10,0]
+              },
+              bigImageSrc:'http://img03.taobaocdn.com/bao/uploaded/i3/T1fftwXf8jXXX7ps79_073021.jpg'
+            }); 
+          }); 
+        },['loadcss']);
+      })(); 
+    </script> 
+  </body>
+</html>

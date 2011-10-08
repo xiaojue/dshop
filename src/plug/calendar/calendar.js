@@ -8,8 +8,6 @@
     dshop.add('calendar',function(){
         
         var calendar=function(callback){
-
-          var that=this;
          //先载入yui3的资源 
           function loadcalendar(){
             if(!calendar.loaded){
@@ -20,7 +18,7 @@
                   });
             }else{
               setTimeout(function(){
-                if(calendar.core) callback(calendar.core);
+                if(calendar.core) callback(calendar.core,KISSY);
                 else loadcalendar();
               },1);
             }
