@@ -9,16 +9,38 @@
         var cityzone=function(config){
           var _config={
             data:dshop.host+'cityzone/data.js',
-            type:'select' //3种模式,select选择模式 | select，直接渲染模式 | draw，自定义模式 | custom
+            datasuccess:null //获得数据之后成功的回调
           };
+          $.extend(_config,config);
+          
+          this.config=_config;
         }
 
         cityzone.prototype={
             init:function(){
-
-            },
-            filter:function(){
-
+              var that=this,cg=that.config;
+                //获取远程数据,处理数据成obj格式
+                $.getScript(cg.data,function(){
+                    var city=function(){
+                      var temobj={},arr=W.sinapb_arr.split(',');
+                      for(var i=0;i<arr.length;i=i+2){
+                        temobj[arr[i]]=arr[i+1];
+                      }
+                      return temobj;
+                    }();
+                    var zone=function(){
+                      var temobj={};
+                      for(var i in city){
+                        var arr=W.sinaps_arr[i].split(','),temjobj={};
+                        for(var j=0;j<arr.length;j=j+2){
+                          temjobj[arr[j]]=arr[j+1];
+                        }
+                        temobj[i]=temjobj;
+                      }
+                      return temobj;
+                    }();
+                    if(cg.datasuccess) cg.datasuccess(city,zone);
+                });
             }
         }
 

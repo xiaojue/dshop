@@ -12,7 +12,12 @@
     <script>
       (function(){
         dshop.use('cityzone',function(){
-          var test1=new dshop.mods.cityzone(); 
+          var test1=new dshop.mods.cityzone({
+            datasuccess:function(city,zone){
+              //进行data的操作，这里随便怎么写- - 数据格式已经有了
+            }
+          }); 
+          test1.init();
         });
       })(); 
     </script> 
