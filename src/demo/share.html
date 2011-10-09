@@ -1,0 +1,20 @@
+<html>
+  <head>
+    <title>test</title>
+    <script src="http://s1.ifiter.com/static/GM/jquery/jquery-1.6.2.min.js"></script>
+    <script src="http://localhost/idmstatic/js/dshop/src/dshop.js"></script>
+    
+  </head>
+  <body>
+    <div id="J_Share">
+    </div>
+    <script>
+      (function(){
+        dshop.use('share',function(){
+          var test1=new dshop.mods.share('#J_Share');
+          test1.init();
+        },['loadcss','template']); 
+      })();
+    </script> 
+  </body>
+</html>
