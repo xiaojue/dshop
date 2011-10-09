@@ -8,7 +8,7 @@
         
         var magnifier=function(callback){
           var loadkissy=function(){
-            if(!magnifier.loaded){
+            if(!magnifier.core){
               var kissymin='http://a.tbcdn.cn/s/kissy/1.2.0/kissy-min.js';
               $.getScript(kissymin,function(){
                   kissymagnifier();
@@ -34,8 +34,6 @@
           loadkissy();
           
         };
-
-        magnifier.loaded=false;
 
         dshop.mods['magnifier']=magnifier;
     });

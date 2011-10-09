@@ -10,8 +10,7 @@
         var calendar=function(callback){
          //先载入yui3的资源 
           function loadcalendar(){
-            if(!calendar.loaded){
-                calendar.loaded=true;
+            if(!calendar.core){
                 var kissymin='http://a.tbcdn.cn/s/kissy/1.1.7/kissy-min.js';
                 $.getScript(kissymin,function(){
                     kissycalendar();
@@ -37,8 +36,6 @@
           loadcalendar();
 
         };
-
-        calendar.loaded=false;
 
         dshop.mods['calendar']=calendar;
     });

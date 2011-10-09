@@ -1,0 +1,30 @@
+<html>
+  <head>
+    <title>test</title>
+    <script src="http://s1.ifiter.com/static/GM/jquery/jquery-1.6.2.min.js"></script>
+    <script src="http://localhost/idmstatic/js/dshop/src/dshop.js"></script>
+    
+  </head>
+  <body>
+    <div>
+      <input id="J_Suggest">
+    </div>
+    <script>
+      (function(){
+        dshop.use('suggest',function(){
+          dshop.mods.suggest(function(suggest,KISSY){
+            var dataUrl = 'http://suggestion.baidu.com/su?p=3&cb=window.bdsug.sug';
+            var sug = new suggest('#J_Suggest',dataUrl,{
+              queryName:'wd',
+              callbackFn:'bdsug.sug'
+            });
+
+          sug.on('dataReturn', function() {
+              this.returnedData = this.returnedData.s || [];
+          });
+          }); 
+        }); 
+      })();
+    </script> 
+  </body>
+</html>
