@@ -26,18 +26,18 @@
         that._queuefn[name]=mod;
       },
       use:function(name,callback,required){
-      var that=this;
-      if(that._queuefn.hasOwnProperty(name)){
-        if(callback) callback(); 
-      }else{
-        var list=[name];
-        if(required) list=list.concat(required);
-        for(var i=0;i<list.length;i++){
-          var modname=list[i],
-          file=that.host+modname+'/'+modname+'.js';
-          if(that._queuefn.hasOwnProperty(modname)) continue;
-          (function(modname,index){
-              $.getScript(file,function(){
+        var that=this;
+        if(that._queuefn.hasOwnProperty(name)){
+          if(callback) callback(); 
+        }else{
+          var list=[name];
+          if(required) list=list.concat(required);
+          for(var i=0;i<list.length;i++){
+            var modname=list[i],
+            file=that.host+modname+'/'+modname+'.js';
+            if(that._queuefn.hasOwnProperty(modname)) continue;
+              (function(modname,index){
+                $.getScript(file,function(){
                   that._queue[index]=that._queuefn[modname];
                   if(that._queue.length==list.length){
                     for(var j=0;j<that._queue.length;j++){
@@ -48,8 +48,8 @@
                   }
                 }); 
             })(modname,i);
+          }
         }
-      }
       }
     }
 
