@@ -1,0 +1,37 @@
+<html>
+  <head>
+    <title>test</title>
+    <script src="http://s1.ifiter.com/static/GM/jquery/jquery-1.6.2.min.js"></script>
+    <script src="http://localhost/idmstatic/js/dshop/src/dshop.js"></script>
+    
+  </head>
+  <body>
+    <a id="J_mybubble" style="margin:100px;display:block;width:30px;height:30px;background:#ccc;overflow:hidden;" href="#">test</a>
+    <div id="J_muen" style="background:red;;">隐藏菜单,100*100</div>
+    <a href="#" id="J_mybubble2" style="position:absolute;left:500px;top:200px;display:block;width:30px;height:40px;overflow:hidden;background:red;">test2</a>
+    <script>
+      (function(){
+        dshop.use('bubble',function(){
+          var test1=new dshop.mods.bubble({
+            postion:'bottom',
+            target:'#J_mybubble',
+            content:'#J_muen'
+          });
+          test1.init();
+          $('#J_mybubble').click(function(){
+            test1.show();
+          });
+          var test2=new dshop.mods.bubble({
+            postion:[-100,10],
+            target:'#J_mybubble2'
+          });
+          test2.init();
+          $('#J_mybubble2').click(function(){
+            test2.setcontent('我是浮出层，js创建的！');
+            test2.show();
+          });
+        }); 
+      })();
+    </script> 
+  </body>
+</html>
