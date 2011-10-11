@@ -65,7 +65,7 @@
 	W.dshopmods = dshopmods;
 	//关闭ajax缓存,需要时自行开启，然后再自行关闭
 	$.ajaxSetup({
-		cache: false
+		cache: true
 	});
 	//加载HTML5.js,如果浏览器为ie则加载
 	if ($.browser.msie) {
