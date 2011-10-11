@@ -1,0 +1,1 @@
+(function(a,b){dshop.add("loadcss",function(){var c=function(e){function d(f){var f=b("<link>").attr({type:"text/css",rel:"stylesheet",href:f+"?t="+new Date().valueOf()+".css"});b("head").prepend(f)}if(typeof e=="string"){d(e)}else{b.each(e,function(f,g){d(g)})}};dshop.mods.loadcss=c})})(window,jQuery);

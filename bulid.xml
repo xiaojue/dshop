@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="GBK"?>
+<project name="MyTask" basedir="." default="loadfile">
+  <property name="yui-compressor" value="tool/yuicompressor.jar"/>
+	<property name="bulid.dir" value="bulid"/>
+  <property name="src.dir" value="src"/>
+  
+  <!-- 删除现有目录-->
+  <delete dir="${bulid.dir}/*"/>
+	<!-- 创建基本目录-->
+  <mkdir dir="${bulid.dir}"/>
+
+  <!-- 复制src到bulid目录所有的css，js文件 -->
+  <copy todir="${bulid.dir}" encoding="UTF-8" outputencoding="UTF-8">
+    <fileset dir="${src.dir}"/>
+  </copy>
+  <delete dir="${bulid.dir}/demo"/>
+  
+  <!-- 压缩bulid目录所有的css，js文件 -->
+  <target name="loadfile">
+    <apply executable="java" parallel="false" failonerror="true">
+      <fileset dir="${src.dir}/plug" includes="*/*.js" />
+			<arg line="-jar" />
+			<arg path="${yui-compressor}" />
+			<arg line="--charset utf-8" />
+			<srcfile/>
+			<arg line="-o" />
+      <mapper type="glob" from="*.js" to="${bulid.dir}/plug/*-min.js" />
+		  <targetfile/>
+		</apply>
+
+    <apply executable="java" parallel="false" failonerror="true">
+      <fileset dir="${src.dir}/plug" includes="*/*.css" />
+			<arg line="-jar" />
+			<arg path="${yui-compressor}" />
+			<arg line="--charset utf-8" />
+			<srcfile/>
+			<arg line="-o" />
+      <mapper type="glob" from="*.css" to="${bulid.dir}/plug/*-min.css" />
+		  <targetfile/>
+    </apply>
+
+     <apply executable="java" parallel="false" failonerror="true">
+      <fileset dir="${src.dir}/mods" includes="*/*.js" />
+			<arg line="-jar" />
+			<arg path="${yui-compressor}" />
+			<arg line="--charset utf-8" />
+			<srcfile/>
+			<arg line="-o" />
+      <mapper type="glob" from="*.js" to="${bulid.dir}/mods/*-min.js" />
+		  <targetfile/>
+    </apply>
+
+    <apply executable="java" parallel="false" failonerror="true">
+      <fileset dir="${src.dir}/mods" includes="*/*.css" />
+			<arg line="-jar" />
+			<arg path="${yui-compressor}" />
+			<arg line="--charset utf-8" />
+			<srcfile/>
+			<arg line="-o" />
+      <mapper type="glob" from="*.css" to="${bulid.dir}/mods/*-min.css" />
+		  <targetfile/>
+    </apply>
+
+     <apply executable="java" parallel="false" failonerror="true">
+      <fileset dir="${src.dir}" includes="dshop.js" />
+			<arg line="-jar" />
+			<arg path="${yui-compressor}" />
+			<arg line="--charset utf-8" />
+			<srcfile/>
+			<arg line="-o" />
+      <mapper type="glob" from="*.js" to="${bulid.dir}/dshop-min.js" />
+		  <targetfile/>
+    </apply>
+
+  </target>
+</project>
