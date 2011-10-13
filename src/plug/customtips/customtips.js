@@ -7,7 +7,6 @@
     dshop.add('customtips',function(){
       
       var customtips=function(html){
-        this.range=range;
         this.html=html;
         this.coordX=0;
         this.coordY=0;
@@ -17,7 +16,7 @@
       customtips.prototype={
         init:function(){
           var that=this;
-          that._createlayer(html,that.layerid.slice(1));
+          that._createlayer(that.html,that.layerid.slice(1));
           $(document).live('mousemove',function(e){
               that.coordX=e.originalEvent.x || e.originalEvent.layerX || 0;
               that.coordY=e.originalEvent.y || e.originalEvent.layerY || 0;
@@ -25,8 +24,9 @@
         },
         _createlayer:function(html,id){
           var that=this,
-          layer=$('<div>').attr('id',id).html(html);
-          $('body').append(layer).css('position','absolute').hide();
+          layer=$('<div>').attr('id',id).html(html).css('position','absolute');
+          $('body').append(layer);
+          layer.hide();
         },
         fire:function(){
           var that=this;

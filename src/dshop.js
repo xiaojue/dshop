@@ -38,12 +38,15 @@
 					var modname = list[i],
 					filename = (debug == - 1) ? '-min.js': '.js';
 					file = that.host + modname + '/' + modname + filename;
-					if (that._queuefn.hasOwnProperty(modname)) continue;
+          if (that._queuefn.hasOwnProperty(modname) || that.mods.hasOwnProperty(modname)) continue; 
 					(function(modname, index) {
+            that.mods[modname]=modname;  
 						$.getScript(file, function() {
-							that._queue[index] = that._queuefn[modname];
-							if (that._queue.length == list.length) {
+							that._queue[index]=that._queuefn[modname];
+              if (that._queue.length == list.length) {
 								for (var j = 0; j < that._queue.length; j++) {
+                  //如果不存在，意思是在45行没取到得到不是function而是undef，那么在全部load之后，不存在重新赋值取一下。
+                  if(!that._queue[j]) that._queue[j]=that._queuefn[modname];
 									that._queue[j]();
 								}
 								if (callback) callback();

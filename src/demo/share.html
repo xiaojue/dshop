@@ -8,12 +8,17 @@
   <body>
     <div id="J_Share">
     </div>
+    <div>划中我的词，分享到微博等</div>
     <script>
       (function(){
         dshop.use('share',function(){
           var test1=new dshop.mods.share('#J_Share');
           test1.init();
-        },['loadcss','template']); 
+        },['loadcss','template']);
+        dshop.use('selectshare',function(){
+          var test1=new dshop.mods.selectshare();
+          test1.init();
+        },['loadcss','template','share','customtips']);
       })();
     </script> 
   </body>
