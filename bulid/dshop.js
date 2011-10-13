@@ -10,65 +10,70 @@
  * bulid.bat和bulid.xml是打包文件和脚本，本地需要安装ant和java，还有yuicompress,建议本地使用git管理自己的项目和分支。
  * 自测无误后再提交svn到测试机测试，之后没问题了再发布上线。
  */
-(function(W,$){
-    
-    var debug = W.location.href.indexOf('debug');
+(function(W, $) {
 
-    var dependfix=function(host){
-      this._queue=[];
-      this._queuefn={};
-      this.mods={};
-      this.host=host;
-    };
+	var debug = W.location.href.indexOf('debug');
 
-    dependfix.prototype={
-      add:function(name,mod){
-        var that=this;  
-        if(that._queuefn.hasOwnProperty(name)) return;
-        that._queuefn[name]=mod;
-      },
-      use:function(name,callback,required){
-        var that=this;
-        if(that._queuefn.hasOwnProperty(name)){
-          if(callback) callback(); 
-        }else{
-          var list=[name];
-          if(required) list=list.concat(required);
-          for(var i=0;i<list.length;i++){
-            var modname=list[i],filename = (debug==-1)?'.js':'-min.js';
-            file=that.host+modname+'/'+modname+filename;
-            if(that._queuefn.hasOwnProperty(modname)) continue;
-              (function(modname,index){
-                $.getScript(file,function(){
-                  that._queue[index]=that._queuefn[modname];
-                  if(that._queue.length==list.length){
-                    for(var j=0;j<that._queue.length;j++){
-                      that._queue[j]();
-                    }
-                    if(callback) callback();
-                    that._queue=[];
-                  }
-                }); 
-            })(modname,i);
-          }
-        }
-      }
-    }
-    
-    var host=(debug==-1) ? 'http://s1.ifiter.com/idmstatic/js/dshop/bulid/' : 'http://localhost/idmstatic/js/dshop/bulid/',
-        dshop=new dependfix(host+'plug/'),
-        dshopmods=new dependfix(host+'mods/');
-    //要用社区的js的时候,直接引这个http://s1.ifiter.com/static/GM/bulid/GM-min.js?t=20110915.js
-    //社区里的tools部分会不断重写到plug里
-    W.dshop=dshop;
-    W.dshopmods=dshopmods;
-    //关闭ajax缓存,需要时自行开启，然后再自行关闭
-    $.ajaxSetup({
-        cache:false
-    });
-    //加载HTML5.js,如果浏览器为ie则加载
-    if($.browser.msie){
-      var html5js='http://a.tbcdn.cn/p/fp/2011a/html5.js';
-      $.getScript(html5js);
-    }
-})(window,jQuery);
+	var dependfix = function(host) {
+		this._queue = [];
+		this._queuefn = {};
+		this.mods = {};
+		this.host = host;
+	};
+
+	dependfix.prototype = {
+		add: function(name, mod) {
+			var that = this;
+			if (that._queuefn.hasOwnProperty(name)) return;
+			that._queuefn[name] = mod;
+		},
+		use: function(name, callback, required) {
+			var that = this;
+			if (that._queuefn.hasOwnProperty(name)) {
+				if (callback) callback();
+			} else {
+				var list = [name];
+				if (required) list = list.concat(required);
+				for (var i = 0; i < list.length; i++) {
+					var modname = list[i],
+					filename = (debug == - 1) ? '-min.js': '.js';
+					file = that.host + modname + '/' + modname + filename;
+          if (that._queuefn.hasOwnProperty(modname) || that.mods.hasOwnProperty(modname)) continue; 
+					(function(modname, index) {
+            that.mods[modname]=modname;  
+						$.getScript(file, function() {
+							that._queue[index]=that._queuefn[modname];
+              if (that._queue.length == list.length) {
+								for (var j = 0; j < that._queue.length; j++) {
+                  //如果不存在，意思是在45行没取到得到不是function而是undef，那么在全部load之后，不存在重新赋值取一下。
+                  if(!that._queue[j]) that._queue[j]=that._queuefn[modname];
+									that._queue[j]();
+								}
+								if (callback) callback();
+								that._queue = [];
+							}
+						});
+					})(modname, i);
+				}
+			}
+		}
+	}
+
+	var host = (debug == - 1) ? 'http://s1.ifiter.com/idmstatic/js/dshop/bulid/': 'http://localhost/idmstatic/js/dshop/src/',
+	dshop = new dependfix(host + 'plug/'),
+	dshopmods = new dependfix(host + 'mods/');
+	//要用社区的js的时候,直接引这个http://s1.ifiter.com/static/GM/bulid/GM-min.js?t=20110915.js
+	//社区里的tools部分会不断重写到plug里
+	W.dshop = dshop;
+	W.dshopmods = dshopmods;
+	//关闭ajax缓存,需要时自行开启，然后再自行关闭
+	$.ajaxSetup({
+		cache: true
+	});
+	//加载HTML5.js,如果浏览器为ie则加载
+	if ($.browser.msie) {
+		var html5js = 'http://a.tbcdn.cn/p/fp/2011a/html5.js';
+		$.getScript(html5js);
+	}
+})(window, jQuery);
+

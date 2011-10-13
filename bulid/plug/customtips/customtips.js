@@ -31,8 +31,8 @@
         fire:function(){
           var that=this;
           $(that.layerid).css({
-              left:that.coordX+15,
-              top:that.coordY+15
+              left:that.coordX+10,
+              top:that.coordY+10
             }).show(); 
         },
         hide:function(){

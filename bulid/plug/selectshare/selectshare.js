@@ -15,33 +15,22 @@
           },
           init:function(){
             var that=this,
-            tips=new dshop.mods['customtips']('<div id="J_SelectionShare" style="background:#fff;padding:2px;border:#ddd solid 1px;"></div>');
+            tips=new dshop.mods['customtips']('<div id="J_SelectionShare"></div>');
             tips.init();
             var share=new dshop.mods.share('#J_SelectionShare');
             share.init();
-            var T;
             $(that.range).live('mouseup',function(e){
-              clearTimeout(T);
-              T=setTimeout(function(){
-               var text=that.getselectTxt();
+                var text=that.getselectTxt();
                 if(text){
                   tips.fire();
                 }else{
                   tips.hide();
                 }
-              },20);
-              });
-            
+            });
           $('#J_SelectionShare').live('mousedown',function(){
               var text=that.getselectTxt();
               if(text){
-                $('#J_SelectionShare a').each(function(){
-                    var newhref=$.trim($(this).attr('href').replace(/(title=)(.*?)([&|^])/,'$1'+text+'$3')).replace(/\n|\r/gi,'');
-                    $(this).attr({
-                        title:text,
-                        href:newhref
-                    });
-                }); 
+                 
               }else{
                 tips.hide();
                 return false;
