@@ -39,7 +39,10 @@
 					var modname = list[i],
 					filename = that.debug ? '.js':'-min.js';
 					file = that.host + modname + '/' + modname + filename;
-          if (that._queuefn.hasOwnProperty(modname) || that.mods.hasOwnProperty(modname)) continue; 
+          if (that._queuefn.hasOwnProperty(modname) || that.mods.hasOwnProperty(modname)){
+            map.push(modname);
+            continue;
+          } 
 					(function(modname, index) {
             that.mods[modname]=modname;  
 						$.getScript(file, function() {
