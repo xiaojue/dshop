@@ -18,10 +18,9 @@
           var that=this;
           that._createlayer(that.html,that.layerid.slice(1));
           $('body').live('mousemove',function(e){
-              var sTop = document.documentElement.scrollTop == 0 ? document.body.scrollTop : document.documentElement.scrollTop; 
-              if($.browser.mozilla) sTop=0;
-              that.coordX=e.originalEvent.x || e.originalEvent.layerX || 0;
-              that.coordY=(e.originalEvent.y || e.originalEvent.layerY || 0)+sTop;
+              var  sh = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+              that.coordX=e.clientX;
+              that.coordY=e.clientY+sh;
           });
         },
         _createlayer:function(html,id){
