@@ -12,13 +12,14 @@
  */
 (function(W, $) {
 
-	var debug = W.location.href.indexOf('debug');
+  var debug = (W.location.href.indexOf('debug') == -1) ? false : true ;
 
 	var dependfix = function(host) {
 		this._queue = [];
 		this._queuefn = {};
 		this.mods = {};
 		this.host = host;
+    this.debug = debug;
 	};
 
 	dependfix.prototype = {
@@ -36,7 +37,7 @@
 				if (required) list = list.concat(required);
 				for (var i = 0; i < list.length; i++) {
 					var modname = list[i],
-					filename = (debug == - 1) ? '-min.js': '.js';
+					filename = that.debug ? '.js':'-min.js';
 					file = that.host + modname + '/' + modname + filename;
           if (that._queuefn.hasOwnProperty(modname) || that.mods.hasOwnProperty(modname)) continue; 
 					(function(modname, index) {
@@ -59,7 +60,7 @@
 		}
 	}
 
-	var host = (debug == - 1) ? 'http://s1.ifiter.com/idmstatic/js/dshop/bulid/': 'http://localhost/idmstatic/js/dshop/src/',
+	var host = debug ? 'http://localhost/idmstatic/js/dshop/src/' : 'http://s1.ifiter.com/idmstatic/js/dshop/bulid/',
 	dshop = new dependfix(host + 'plug/'),
 	dshopmods = new dependfix(host + 'mods/');
 	//要用社区的js的时候,直接引这个http://s1.ifiter.com/static/GM/bulid/GM-min.js?t=20110915.js

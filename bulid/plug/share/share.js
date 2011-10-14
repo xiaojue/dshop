@@ -35,7 +35,8 @@
             this.config=_cg;
             //载入样式文件
             if(!share.cssloaded){
-              dshop.mods['loadcss'](dshop.host+'share/share-min.css');
+              filename=dshop.debug ? '.css' : '-min.css';
+              dshop.mods['loadcss'](dshop.host+'share/share'+filename);
               share.cssloaded=true;
             }
 
