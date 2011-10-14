@@ -1,0 +1,1 @@
+(function(a,b){dshop.add("imgrotate",function(){var c=function(){return{backgroundRotate:function(){}}}();dshop.mods.imgrotate=c})})(window,jQuery);
