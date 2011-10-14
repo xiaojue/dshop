@@ -34,7 +34,7 @@
 						$('.shop_on').show();
 					},
 					function() {
-						$('#J_ShopCart').addClass('hover1');
+						$('#J_ShopCart').removeClass('hover1');
 						$('.shop_on').hide();
 					});
 				},
