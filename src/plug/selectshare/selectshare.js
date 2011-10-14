@@ -22,6 +22,7 @@
                 order:['tsina','kaixin','taojianghu','qzone','tqq','souhu','tsouhu','douban','baidu']
               });
             share.init();
+            $('#J_SelectionShare a').css('border','none');
             var T;
             $(that.range).live('mouseup',function(e){
               clearTimeout(T);
