@@ -29,13 +29,28 @@
 						$('.mid_mall').removeClass('hover')
 						$('.mall_on').hide();
 					});
-					$('#J_ShopCart').hover(function() {
+				$('#J_ShopCart').hover(function() {
 						$('#J_ShopCart').addClass('hover1');
 						$('.shop_on').show();
 					},
 					function() {
 						$('#J_ShopCart').removeClass('hover1');
 						$('.shop_on').hide();
+					});
+					$('#J_Nav').hover(function() {
+						$('#J_Nav').addClass('hover2');
+						$('.mall_nav').show();
+					},
+					function() {
+						$('#J_Nav').removeClass('hover2')
+						$('.mall_nav').hide();
+					});
+				},
+				favorite: function() {
+					$('#J_Favorite').click(function() {
+						dshop.use('favorite', function() {
+                dshop.mods.favorite('动米网健身商城','http://shop.idongmi.com/');
+						});
 					});
 				},
 				searchinit: function() {
@@ -60,11 +75,44 @@
 						});
 					});
 				},
+        shopcart:function(){
+          dshop.use('template',function(){
+            var dl='<dl>'+
+									'<dt><a href="{{href}}"><img src="{{pic}}" alt="{{name}}" title="{{name}}"></a></dt>'+
+									'<dd>'+
+										'<div><a class="gray1" href="{{href}}">{{name}}</a></div>'+
+										'<div class="st"><a href="{{delete}}">删除</a>¥<font>{{price}}</font></div>'+
+									'</dd>'+
+                '</dl>',
+                footbar='<div class="shop_set"><input type="button" class="mall">购物车中共有 {{count}} 件商品</div>';
+            $.ajax({
+              url:'',  
+              type:'POST',
+              data:{
+
+              },
+              success:function(){
+
+              },
+              timeout:5000,
+              error:function(){
+                  //5000没有返回结果，用默认的渲染
+                  var setting={
+                    count:0,
+                    s:[]
+                  };
+
+              }
+            });
+            
+          }); 
+        },
 				init: function() {
 					var that = this;
 					$(function() {
 						that.greetbar();
 						that.menuinit();
+            that.favorite();
 						if ($('#J_Search').length != 0) that.searchinit();
 					});
 				}
