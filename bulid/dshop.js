@@ -29,8 +29,8 @@
 			that._queuefn[name] = mod;
 		},
 		use: function(name, callback, required) {
-			var that = this,map=[];
-			if (that.mods.hasOwnProperty(name)) {
+			var that = this,map=[],loaded=[],T;
+			if (that._queuefn.hasOwnProperty(name)) {
 				if (callback) callback();
 			} else {
 				var list = [name];
@@ -39,8 +39,23 @@
 					var modname = list[i],
 					filename = that.debug ? '.js':'-min.js';
 					file = that.host + modname + '/' + modname + filename;
+          //过滤已经下载过的
           if (that._queuefn.hasOwnProperty(modname) || that.mods.hasOwnProperty(modname)){
             map.push(modname);
+            loaded.push(modname);
+            //最后一个，且模块其实已经全部载入
+            if(loaded.length==list.length && callback) {
+              function checkload(name){
+                T=setTimeout(function(){
+                    if(typeof dshop.mods[name]!='string'){
+                      callback();
+                    }else{
+                      checkload();
+                    };
+                  },10);
+              };
+              checkload(modname);
+            }; 
             continue;
           } 
 					(function(modname, index) {

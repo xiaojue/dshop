@@ -83,6 +83,7 @@
 								count: 0,
 								s: []
 							};
+              console.log(dshop.mods.template)
 							var result = dshop.mods.template.to_html(setting, html);
 							$('#J_ShopCartWrap').html(result);
 						};
