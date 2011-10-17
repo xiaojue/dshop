@@ -30,7 +30,7 @@
 		},
 		use: function(name, callback, required) {
 			var that = this,map=[];
-			if (that._queuefn.hasOwnProperty(name)) {
+			if (that.mods.hasOwnProperty(name)) {
 				if (callback) callback();
 			} else {
 				var list = [name];

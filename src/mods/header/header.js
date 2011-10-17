@@ -29,7 +29,7 @@
 						$('.mid_mall').removeClass('hover')
 						$('.mall_on').hide();
 					});
-				$('#J_ShopCart').hover(function() {
+					$('#J_ShopCart').hover(function() {
 						$('#J_ShopCart').addClass('hover1');
 						$('.shop_on').show();
 					},
@@ -49,7 +49,7 @@
 				favorite: function() {
 					$('#J_Favorite').click(function() {
 						dshop.use('favorite', function() {
-                dshop.mods.favorite('动米网健身商城','http://shop.idongmi.com/');
+							dshop.mods.favorite('动米网健身商城', 'http://shop.idongmi.com/');
 						});
 					});
 				},
@@ -75,44 +75,39 @@
 						});
 					});
 				},
-        shopcart:function(){
-          dshop.use('template',function(){
-            var dl='<dl>'+
-									'<dt><a href="{{href}}"><img src="{{pic}}" alt="{{name}}" title="{{name}}"></a></dt>'+
-									'<dd>'+
-										'<div><a class="gray1" href="{{href}}">{{name}}</a></div>'+
-										'<div class="st"><a href="{{delete}}">删除</a>¥<font>{{price}}</font></div>'+
-									'</dd>'+
-                '</dl>',
-                footbar='<div class="shop_set"><input type="button" class="mall">购物车中共有 {{count}} 件商品</div>';
-            $.ajax({
-              url:'',  
-              type:'POST',
-              data:{
-
-              },
-              success:function(){
-
-              },
-              timeout:5000,
-              error:function(){
-                  //5000没有返回结果，用默认的渲染
-                  var setting={
-                    count:0,
-                    s:[]
-                  };
-
-              }
-            });
-            
-          }); 
-        },
+				shopcart: function() {
+					dshop.use('template', function() {
+						var html = '{{#s}}' + '<dl>' + '<dt><a href="{{id}}"><img src="{{pic}}" alt="{{name}}" title="{{name}}"></a></dt>' + '<dd>' + '<div><a class="gray1" href="{{id}}">{{name}}</a></div>' + '<div class="st"><a href="{{id}}">删除</a>¥<font>{{price}}</font></div>' + '</dd>' + '</dl>' + '{{/s}}' + '<div class="shop_set"><input type="button" class="mall">购物车中共有 {{count}} 件商品</div>';
+						function errorhandle() {
+							var setting = {
+								count: 0,
+								s: []
+							};
+							var result = dshop.mods.template.to_html(setting, html);
+							$('#J_ShopCartWrap').html(result);
+						};
+						$.ajax({
+							url: 'xxx.jsp',
+              datatype:'jsonp',
+							jsonpCallback: 'callback',
+							jsonp: 'callback',
+							data: {},
+							success: function(data) {
+								var result = dshop.mods.template.to_html(data, html);
+								$('#J_ShopCartWrap').html(result);
+							},
+							timeout: 5000,
+							error: errorhandle
+						});
+					});
+				},
 				init: function() {
 					var that = this;
 					$(function() {
 						that.greetbar();
 						that.menuinit();
-            that.favorite();
+						that.favorite();
+            that.shopcart();
 						if ($('#J_Search').length != 0) that.searchinit();
 					});
 				}
