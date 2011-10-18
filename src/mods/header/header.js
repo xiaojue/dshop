@@ -104,7 +104,7 @@
 							$('#J_CartN').html(data['count'])
 						};
 						var id = dshop.mods.cookie('IDMUV');
-						$.getScript('http://dshop.idongmi.com/cart/getCart.json?callback=idmjsonp.cart&cartId=' + id);
+						$.getScript('http://dshop.idongmi.com/cart/getCart.json?callback=idmjsonp.cart&pageNo=1&cid=' + id);
 						$('.J_CartDel').live('click', function() {
 							var shopid = $(this).attr('data-id'),
 							node = $(this);
@@ -112,7 +112,7 @@
 								url: '/cart/delcartgood.ajax',
 								type: 'POST',
 								data: {
-									uid: id,
+									cid: id,
 									gid: shopid
 								},
 								success: function(data) {
