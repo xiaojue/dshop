@@ -54,11 +54,35 @@
             });
 					});
 				},
+        indexscroll:function(){
+          dshop.use('carousel',function(){
+            var indexscroll=new dshop.mods.carousel({
+              wrap:'#J_IndexScroll',
+              wrapitem:'.ScrollItem'
+            });
+          $('#J_leftCol').click(function(){
+              indexscroll.backward();
+            });
+          $('#J_rightCol').click(function(){
+              indexscroll.forward();
+            });
+          });
+        },
+        lazyloadinit:function(){
+          dshop.use('lazyload',function(){
+             var indexlazyload=new dshop.mods.lazyload({
+                 auto:true
+               });
+             indexlazyload.init();
+          });
+        }
 			};
 			return {
 				init: function() {
 					_fn.initNav();
 					_fn.indexfoucs();
+          _fn.indexscroll();
+          _fn.lazyloadinit();
 				}
 			}
 		} ();

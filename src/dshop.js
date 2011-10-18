@@ -29,7 +29,7 @@
 			that._queuefn[name] = mod;
 		},
 		use: function(name, callback, required) {
-      var that = this,map=[];
+      var that = this,map=[],loaded=[],T;
 			if (that._queuefn.hasOwnProperty(name)) {
 				if (callback) callback();
 			} else {
@@ -42,6 +42,20 @@
           //过滤已经下载过的
           if (that._queuefn.hasOwnProperty(modname) || that.mods.hasOwnProperty(modname)){
             map.push(modname);
+            loaded.push(modname);
+            if(loaded.length==list.length){
+              function checklist(){
+                for(var i=0;i<list.length;i++){
+                  if(!that._queuefn[list[i]]){
+                    T=setTimeout(checklist,500);
+                    break;
+                  }else if(i==list.length-1){
+                    callback();
+                  }
+                }
+              }
+              checklist();
+            }
             continue;
           } 
 					(function(modname, index) {
@@ -52,7 +66,9 @@
               if (map.length == list.length) {
 								for (var j = 0; j < that._queue.length; j++) {
                   //如果不存在，意思是在45行没取到得到不是function而是undef，那么在全部load之后，不存在重新赋值取一下。
-                  if(!that._queue[j]) that._queue[j]=that._queuefn[map[j]];
+                  if(!that._queue[j]){
+                    that._queue[j]=that._queuefn[list[j]];
+                  }
 									that._queue[j]();
 								}
 								if (callback) callback();
