@@ -221,7 +221,7 @@
 					config.after(current);
 				},
 				getcurrent: function() {
-					return this.current;
+					return this.config.current;
 				}
 			};
 

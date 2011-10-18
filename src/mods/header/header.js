@@ -116,11 +116,11 @@
 									gid: shopid
 								},
 								success: function(data) {
-									var ret = $.trim(data);
-									if (ret == 1) {
+                  var ret = $.trim(data),data=eval('('+ret+')');
+									if (data.s == 1) {
 										node.closest('dl').remove();
-									} else if (ret == 0) {
-										alert('删除失败，请重试');
+									} else if (data.s == 0) {
+                    alert(data.msg);
 									}
 								},
 								error: function() {

@@ -38,7 +38,7 @@
              }
           }
 
-          $(window).bind('load scroll resize',lazyload.lazyloadfire);
+          if(that.auto) $(window).bind('load scroll resize',lazyload.lazyloadfire);
         }
 
 
@@ -52,7 +52,7 @@
             //把一个img的data-src换成src
             drawimg:function(ele){
               var that=this;
-              if(!!$(ele).attr(that.attr)){
+              if(!$(ele).attr('src') && !!$(ele).attr(that.attr)){
                  var realsrc=$(ele).attr(that.attr);
                  $(ele).attr('src',realsrc); 
                  $(ele).fadeIn(that.effect);

@@ -20,13 +20,22 @@
             img.onload=function(){
               map.push(index);
               if(map.length==l){
-                //全部载入完了
-                //把图片以此插入
-                $(that.cls).each(function(i,node){
+                function _init(){
+                  //全部载入完了-ie6-8下onload不准，需要延迟
+                  //把图片以此插入
+                  $(that.cls).each(function(i,node){
                     var realsrc=$(node).attr(that.attr);
                     $(node).attr('src',realsrc);
-                });
-                if(that.callback) that.callback();
+                    $(node).fadeIn();
+                  });
+                 if(that.callback) that.callback();
+                }
+                if($.browser.msie && $.browser.version <= 8){
+                   setTimeout(_init,500);
+                }else{
+                  _init();
+                }
+               
               }
             }
         });
