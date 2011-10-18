@@ -22,16 +22,23 @@
             });
 
           var _fnfired;
-         
-          $(window).bind('scroll',function(){
-               that.lazyfn(that.target,function(ele){
+          
+          lazyload.lazyloadfire=function(){
+            that.lazyfn(that.target,function(ele){
                   if(that.auto) that.drawimg(ele);
                   if(that.customfn && !_fnfired){
                     that.customfn(ele);
                     _fnfired=true;
                   }
                });
-          });
+             var dh=$('body').height(),wt=$(window).scrollTop(),wh=$(window).height();
+             //如果到了底部，则删除这个lazyload的window事件
+             if(wt+wh>=dh){
+               $(window).unbind('load scroll resize',lazyload.lazyloadfire);
+             }
+          }
+
+          $(window).bind('load scroll resize',lazyload.lazyloadfire);
         }
 
 
