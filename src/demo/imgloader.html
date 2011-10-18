@@ -1,0 +1,27 @@
+<html>
+  <head>
+    <title>test</title>
+    <script src="http://s1.ifiter.com/static/GM/jquery/jquery-1.6.2.min.js"></script>
+    <script src="http://localhost/idmstatic/js/dshop/src/dshop.js"></script>
+    
+  </head>
+  <body>
+    <div>
+      <img class="Jloader" data-src="http://s1.ifiter.com/dianshang/static/images/line_logo4.gif">
+      <img class="Jloader" data-src="http://s1.ifiter.com/dianshang/static/images/img_tu4.jpg">
+      <img class="Jloader" data-src="http://s1.ifiter.com/dianshang/static/images/img_tu4.jpg">
+      <img class="Jloader" data-src="http://s1.ifiter.com/dianshang/static/images/copyright1.jpg">
+      <img class="Jloader" data-src="http://s1.ifiter.com/dianshang/static/images/copyright1.jpg">
+    </div>
+    <script>
+      (function(){
+        dshop.use('imgloader',function(){
+          var test1=new dshop.mods.imgloader('.Jloader',function(){
+            alert('ok')
+          });
+          test1.init();
+        }); 
+      })();
+    </script> 
+  </body>
+</html>

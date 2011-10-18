@@ -8,19 +8,34 @@
 		var index = function() {
 			var _fn = {
 				initNav: function() {
-					$('#J_AllNav>li').bind('mouseenter', function() {
+          var T;
+          $('#J_AllNav>li').bind('mouseenter', function() {
+              clearTimeout(T);
+              $('#J_AllNav>li').removeClass('active');
+              $('.sub_column').hide();
 						$(this).addClass('active');
 						$(this).find('.sub_column').show();
-					}).bind('mouseleave', function() {
-						$(this).removeClass('active');
-						$(this).find('.sub_column').hide();
-					});
-					$('.sub_column').bind('mouseenter', function() {
+          }).bind('mouseleave',function(){
+              var that=this;
+              T=setTimeout(function(){
+                $(that).removeClass('active');
+						    $(that).find('.sub_column').hide();    
+              },100);
+          });
+        $('#J_AllNav>li>a').bind('mouseenter',function(){
+            clearTimeout(T);
+          });
+          $('.sub_column').bind('mouseenter', function() {
+            clearTimeout(T);
 						$(this).closest('li').addClass('active');
 						$(this).show();
 					}).bind('mouseleave', function() {
-						$(this).closest('li').removeClass('active');
-						$(this).hide();
+            var that=this;
+             T=setTimeout(function(){
+              $(that).closest('li').removeClass('active');
+						  $(that).hide();
+             },100);
+						
 					});
 				},
 				indexfoucs: function() {

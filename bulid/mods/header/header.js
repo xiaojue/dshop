@@ -21,6 +21,7 @@
 					['template']);
 				},
 				menuinit: function() {
+					var T;
 					$('#J_MyShop').hover(function() {
 						$('.mid_mall').addClass('hover');
 						$('.mall_on').show();
@@ -29,20 +30,29 @@
 						$('.mid_mall').removeClass('hover')
 						$('.mall_on').hide();
 					});
-					$('#J_ShopCart').hover(function() {
+					$('#J_ShopCart').bind('mouseenter', function() {
+						clearTimeout(T);
 						$('#J_ShopCart').addClass('hover1');
 						$('.shop_on').show();
-					},
-					function() {
+					}).bind('mouseleave', function() {
+						T = setTimeout(function() {
+							$('#J_ShopCart').removeClass('hover1');
+							$('.shop_on').hide();
+						},
+						100);
+					});
+					$('.shop_on').bind('mouseleave', function() {
 						$('#J_ShopCart').removeClass('hover1');
 						$('.shop_on').hide();
+					}).bind('mouseenter', function() {
+						clearTimeout(T);
 					});
 					$('#J_Nav').hover(function() {
 						$('#J_Nav').addClass('hover2');
 						$('.mall_nav').show();
 					},
 					function() {
-            $('#J_Nav').removeClass('hover2');
+						$('#J_Nav').removeClass('hover2');
 						$('.mall_nav').hide();
 					});
 				},
@@ -77,7 +87,7 @@
 				},
 				shopcart: function() {
 					dshop.use('template', function() {
-              var html = '{{#s}}' + '<dl>' + '<dt><a href="{{id}}"><img src="{{pic}}" alt="{{name}}" title="{{name}}"></a></dt>' + '<dd>' + '<div><a class="gray1" href="{{id}}">{{name}}</a></div>' + '<div class="st"><a href="javascript:void(0)" data-id="{{id}}" class="J_CartDel">删除</a>¥<font>{{price}}</font></div>' + '</dd>' + '</dl>' + '{{/s}}' + '<div class="shop_set"><input type="button" class="mall">购物车中共有 {{count}} 件商品</div>';
+						var html = '{{#s}}' + '<dl>' + '<dt><a href="{{goodsId}}"><img src="{{smallPicture}}" alt="{{goodsName}}" title="{{goodsName}}"></a></dt>' + '<dd>' + '<div><a class="gray1" href="{{goodsId}}">{{goodsName}}</a></div>' + '<div class="st"><a href="javascript:void(0)" data-id="{{goodsId}}" class="J_CartDel">删除</a>¥<font>{{price}}</font></div>' + '</dd>' + '</dl>' + '{{/s}}' + '<div class="shop_set"><input type="button" class="mall">购物车中共有 {{count}} 件商品</div>';
 						function inithandle() {
 							var setting = {
 								count: 0,
@@ -93,31 +103,33 @@
 							$('#J_ShopCartWrap').html(result);
 							$('#J_CartN').html(data['count'])
 						};
-            var id=dshop.mods.cookie('IDMUV');
-						$.getScript('http://dshop.idongmi.com/cart/getCart.json?cartId='+id);
-            $('#J_CartDel').live('click',function(){
-                var shopid=$(this).attr('data-id'),node=$(this);
-                $.ajax({
-                   url:'/cart/delcartgood.ajax',
-                   type:'POST',
-                   data:{
-                    uid:id,
-                    gid:shopid
-                   },
-                   success:function(data){
-                     var ret=$.trim(data);
-                     if(ret==1){
-                       node.closest('dl').remove();
-                     }else if(ret==0){
-                       alert('删除失败，请重试');
-                     }
-                   },
-                   error:function(){
-                     alert('系统超时，删除失败');
-                   }
-                });
-            });
-					},['cookie']);
+						var id = dshop.mods.cookie('IDMUV');
+						$.getScript('http://dshop.idongmi.com/cart/getCart.json?callback=idmjsonp.cart&cartId=' + id);
+						$('.J_CartDel').live('click', function() {
+							var shopid = $(this).attr('data-id'),
+							node = $(this);
+							$.ajax({
+								url: '/cart/delcartgood.ajax',
+								type: 'POST',
+								data: {
+									uid: id,
+									gid: shopid
+								},
+								success: function(data) {
+									var ret = $.trim(data);
+									if (ret == 1) {
+										node.closest('dl').remove();
+									} else if (ret == 0) {
+										alert('删除失败，请重试');
+									}
+								},
+								error: function() {
+									alert('系统超时，删除失败');
+								}
+							});
+						});
+					},
+					['cookie']);
 				},
 				init: function() {
 					var that = this;
