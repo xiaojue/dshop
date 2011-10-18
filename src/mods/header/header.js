@@ -42,7 +42,7 @@
 						$('.mall_nav').show();
 					},
 					function() {
-						$('#J_Nav').removeClass('hover2')
+            $('#J_Nav').removeClass('hover2');
 						$('.mall_nav').hide();
 					});
 				},
@@ -67,7 +67,7 @@
 							var dataUrl = 'http://dev.idongmi.com/api/suggestAjax.jsp?max=10';
 							var sug = new suggest('#J_Search', dataUrl, {
 								queryName: 'key',
-								callbackFn: 'callback'
+								callbackFn: 'idmjsonp.suggest'
 							});
 							sug.on('dataReturn', function() {
 								this.returnedData = this.returnedData.s || [];
@@ -77,30 +77,47 @@
 				},
 				shopcart: function() {
 					dshop.use('template', function() {
-						var html = '{{#s}}' + '<dl>' + '<dt><a href="{{id}}"><img src="{{pic}}" alt="{{name}}" title="{{name}}"></a></dt>' + '<dd>' + '<div><a class="gray1" href="{{id}}">{{name}}</a></div>' + '<div class="st"><a href="{{id}}">删除</a>¥<font>{{price}}</font></div>' + '</dd>' + '</dl>' + '{{/s}}' + '<div class="shop_set"><input type="button" class="mall">购物车中共有 {{count}} 件商品</div>';
-						function errorhandle() {
+              var html = '{{#s}}' + '<dl>' + '<dt><a href="{{id}}"><img src="{{pic}}" alt="{{name}}" title="{{name}}"></a></dt>' + '<dd>' + '<div><a class="gray1" href="{{id}}">{{name}}</a></div>' + '<div class="st"><a href="javascript:void(0)" data-id="{{id}}" class="J_CartDel">删除</a>¥<font>{{price}}</font></div>' + '</dd>' + '</dl>' + '{{/s}}' + '<div class="shop_set"><input type="button" class="mall">购物车中共有 {{count}} 件商品</div>';
+						function inithandle() {
 							var setting = {
 								count: 0,
 								s: []
 							};
-              console.log(dshop.mods.template)
-							var result = dshop.mods.template.to_html(setting, html);
+							var result = dshop.mods.template.to_html(html, setting);
 							$('#J_ShopCartWrap').html(result);
 						};
-						$.ajax({
-							url: 'xxx.jsp',
-              datatype:'jsonp',
-							jsonpCallback: 'callback',
-							jsonp: 'callback',
-							data: {},
-							success: function(data) {
-								var result = dshop.mods.template.to_html(data, html);
-								$('#J_ShopCartWrap').html(result);
-							},
-							timeout: 5000,
-							error: errorhandle
-						});
-					});
+
+						inithandle();
+						idmjsonp.cart = function(data) {
+							var result = dshop.mods.template.to_html(html, data);
+							$('#J_ShopCartWrap').html(result);
+							$('#J_CartN').html(data['count'])
+						};
+            var id=dshop.mods.cookie('IDMUV');
+						$.getScript('http://dshop.idongmi.com/cart/getCart.json?cartId='+id);
+            $('#J_CartDel').live('click',function(){
+                var shopid=$(this).attr('data-id'),node=$(this);
+                $.ajax({
+                   url:'/cart/delcartgood.ajax',
+                   type:'POST',
+                   data:{
+                    uid:id,
+                    gid:shopid
+                   },
+                   success:function(data){
+                     var ret=$.trim(data);
+                     if(ret==1){
+                       node.closest('dl').remove();
+                     }else if(ret==0){
+                       alert('删除失败，请重试');
+                     }
+                   },
+                   error:function(){
+                     alert('系统超时，删除失败');
+                   }
+                });
+            });
+					},['cookie']);
 				},
 				init: function() {
 					var that = this;
@@ -108,7 +125,7 @@
 						that.greetbar();
 						that.menuinit();
 						that.favorite();
-            that.shopcart();
+						that.shopcart();
 						if ($('#J_Search').length != 0) that.searchinit();
 					});
 				}

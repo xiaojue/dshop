@@ -29,7 +29,7 @@
 			that._queuefn[name] = mod;
 		},
 		use: function(name, callback, required) {
-			var that = this,map=[],loaded=[],T;
+      var that = this,map=[],loaded=[];
 			if (that._queuefn.hasOwnProperty(name)) {
 				if (callback) callback();
 			} else {
@@ -46,11 +46,11 @@
             //最后一个，且模块其实已经全部载入
             if(loaded.length==list.length && callback) {
               function checkload(name){
-                T=setTimeout(function(){
+                setTimeout(function(){
                     if(typeof dshop.mods[name]!='string'){
                       callback();
                     }else{
-                      checkload();
+                      checkload(name);
                     };
                   },10);
               };
@@ -86,6 +86,7 @@
 	//社区里的tools部分会不断重写到plug里
 	W.dshop = dshop;
 	W.dshopmods = dshopmods;
+  W.idmjsonp={};
 	//关闭ajax缓存,需要时自行开启，然后再自行关闭
 	$.ajaxSetup({
 		cache: true

@@ -80,7 +80,7 @@
 
 						_bulid(this.config);
 
-						if (this.config.auto) {
+						if (this.config.auto){
 							this.auto();
 							this.autoEvent();
 						}

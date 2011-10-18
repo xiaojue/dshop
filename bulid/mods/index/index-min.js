@@ -1,0 +1,1 @@
+(function(a,b){dshopmods.add("index",function(){var c=function(){var d={initNav:function(){b("#J_AllNav>li").hover(function(){b(this).addClass("active");b(this).find(".sub_column").show()},function(){b(this).removeClass("active");b(this).find(".sub_column").hide()})}};return{init:function(){d.initNav()}}}();dshopmods.mods.index=c})})(window,jQuery);
