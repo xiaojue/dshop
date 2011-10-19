@@ -24,7 +24,8 @@
           function kissymagnifier(){
             var base='http://a.tbcdn.cn/s/kissy/1.2.0/';
             KISSY.Config.base= base;
-            dshop.mods['loadcss'](dshop.host+'magnifier/magnifier-min.css');
+            var filename = dshop.debug ? '.css' : '-min.css';
+            dshop.mods['loadcss'](dshop.host+'magnifier/magnifier'+filename);
             KISSY.use('imagezoom',function(S){
                 magnifier.core=S.ImageZoom;
                 callback(magnifier.core,S);
