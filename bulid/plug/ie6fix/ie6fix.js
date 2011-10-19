@@ -9,8 +9,8 @@
 		var ie6fix = function() {
 			var fn = {
 				fixpng: function(range) {
-          if(!range) range='body';
-					$(range+' img').each(function() {
+          if(!range) range='body img';
+					$(range).each(function() {
 						var imgName = this.src.toUpperCase();
 						if (imgName.substring(imgName.length - 3, imgName.length) == "PNG") {
 							var $img = $('<span>').css({

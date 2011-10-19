@@ -20,6 +20,11 @@
 					},
 					['template']);
 				},
+        fixpng:function(){
+          dshop.use('ie6fix',function(){
+              dshop.mods.ie6fix.fixpng('.J_Fixpng'); 
+          });
+        },
 				menuinit: function() {
 					var T;
 					$('#J_MyShop').hover(function() {
@@ -87,7 +92,7 @@
 				},
 				shopcart: function() {
 					dshop.use('template', function() {
-						var html = '{{#s}}' + '<dl>' + '<dt><a href="{{goodsId}}"><img src="{{smallPicture}}" alt="{{goodsName}}" title="{{goodsName}}"></a></dt>' + '<dd>' + '<div><a class="gray1" href="{{goodsId}}">{{goodsName}}</a></div>' + '<div class="st"><a href="javascript:void(0)" data-id="{{goodsId}}" class="J_CartDel">删除</a>¥<font>{{price}}</font></div>' + '</dd>' + '</dl>' + '{{/s}}' + '<div class="shop_set"><input type="button" class="mall">购物车中共有 {{count}} 件商品</div>';
+						var html = '{{#s}}' + '<dl>' + '<dt><a href="{{goodsId}}"><img src="{{smallPicture}}" alt="{{goodsName}}" title="{{goodsName}}"></a></dt>' + '<dd>' + '<div><a class="gray1" href="{{goodsId}}">{{goodsName}}</a></div>' + '<div class="st"><a href="javascript:void(0)" data-id="{{goodsId}}" class="J_CartDel">删除</a>¥<font>{{price}}</font></div>' + '</dd>' + '</dl>' + '{{/s}}' + '<div class="shop_set">{{#s}}<input type="button" class="mall">购物车中共有 {{count}} 件商品{{/s}}{{^s}}购物车里什么也没有呢，快去随便逛逛？{{/s}}</div>';
 						function inithandle() {
 							var setting = {
 								count: 0,
@@ -139,6 +144,7 @@
 						that.favorite();
 						that.shopcart();
 						if ($('#J_Search').length != 0) that.searchinit();
+            if($.browser.msie && $.browser.version == 6) that.fixpng();
 					});
 				}
 			}
