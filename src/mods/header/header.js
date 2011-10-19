@@ -20,9 +20,10 @@
 					},
 					['template']);
 				},
-        fixpng:function(){
+        fixie6:function(){
           dshop.use('ie6fix',function(){
               dshop.mods.ie6fix.fixpng('.J_Fixpng'); 
+              dshop.mods.ie6fix.addhover('.pro_img','ie6hover');
           });
         },
 				menuinit: function() {
@@ -75,7 +76,7 @@
 						if (val == '') $(this).val(msg);
 					});
         $('#J_SearchForm').submit(function(){
-            var val=$.trim(this.value);
+            var val=$.trim($('#J_Search').val());
             if(val == msg || val == ""){
               alert('请输入搜索商品的名称');
               return false;
@@ -148,7 +149,7 @@
 						that.favorite();
 						that.shopcart();
 						if ($('#J_Search').length != 0) that.searchinit();
-            if($.browser.msie && $.browser.version == 6) that.fixpng();
+            if($.browser.msie && $.browser.version == 6) that.fixie6();
 					});
 				}
 			}

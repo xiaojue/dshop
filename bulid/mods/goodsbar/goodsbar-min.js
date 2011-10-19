@@ -1,0 +1,1 @@
+(function(a,b){dshopmods.add("goodsbar",function(){var c=function(){};dshopmods.mods.goodsbar=c})})(window,jQuery);
