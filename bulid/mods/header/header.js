@@ -35,7 +35,7 @@
 						$('.mid_mall').removeClass('hover')
 						$('.mall_on').hide();
 					});
-					$('#J_ShopCart').bind('mouseenter', function() {
+					$('#J_ShopCart').bind('mouseenter', function(e) {
 						clearTimeout(T);
 						$('#J_ShopCart').addClass('hover1');
 						$('.shop_on').show();
@@ -46,10 +46,7 @@
 						},
 						100);
 					});
-					$('.shop_on').bind('mouseleave', function() {
-						$('#J_ShopCart').removeClass('hover1');
-						$('.shop_on').hide();
-					}).bind('mouseenter', function() {
+					$('.shop_on').bind('mouseenter', function() {
 						clearTimeout(T);
 					});
 					$('#J_Nav').hover(function() {

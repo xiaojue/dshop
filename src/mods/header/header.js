@@ -35,7 +35,7 @@
 						$('.mid_mall').removeClass('hover')
 						$('.mall_on').hide();
 					});
-					$('#J_ShopCart').bind('mouseenter', function() {
+					$('#J_ShopCart').bind('mouseenter', function(e) {
 						clearTimeout(T);
 						$('#J_ShopCart').addClass('hover1');
 						$('.shop_on').show();
@@ -46,10 +46,7 @@
 						},
 						100);
 					});
-					$('.shop_on').bind('mouseleave', function() {
-						$('#J_ShopCart').removeClass('hover1');
-						$('.shop_on').hide();
-					}).bind('mouseenter', function() {
+					$('.shop_on').bind('mouseenter', function() {
 						clearTimeout(T);
 					});
 					$('#J_Nav').hover(function() {
@@ -77,6 +74,13 @@
 						var val = $.trim($(this).val());
 						if (val == '') $(this).val(msg);
 					});
+        $('#J_SearchForm').submit(function(){
+            var val=$.trim(this.value);
+            if(val == msg || val == ""){
+              alert('请输入搜索商品的名称');
+              return false;
+            }
+          });
 					dshop.use('suggest', function() {
 						dshop.mods.suggest(function(suggest, KISSY) {
 							var dataUrl = 'http://dev.idongmi.com/api/suggestAjax.jsp?max=10';
