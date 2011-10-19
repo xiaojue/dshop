@@ -109,7 +109,12 @@
 						});
 						indexlazyload.init();
 					});
-				}
+				},
+        goodsbarinit:function(){
+          dshopmods.use('goodsbar',function(){
+              var indexgoodsbar=dshopmods.mods.goodsbar.torouse();
+          });
+        }
 			};
 			return {
 				init: function() {
@@ -117,6 +122,7 @@
 					_fn.indexfoucs();
 					_fn.indexscroll();
 					_fn.lazyloadinit();
+          _fn.goodsbarinit();
 				}
 			}
 		} ();

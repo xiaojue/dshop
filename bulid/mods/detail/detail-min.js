@@ -1,0 +1,1 @@
+(function(a,b){dshopmods.add("detail",function(){var c=function(){var d={magnifier:function(){dshop.use("magnifier",function(){})},picgroup:function(){},shareinit:function(){},detailtab:function(){}};return{init:function(){d.magnifier();d.picgroup();d.shareinit();d.detailtab()}}};dshopmods.mods.detail=c})})(window,jQuery);
