@@ -1,19 +1,16 @@
 .ks-imagezoom-wrap {
     position: relative;
-    width: 310px;
-    height: 310px;
-    border: 1px solid gray;
+    width: 298px;
+    height: 298px;
 }
 
 .ks-imagezoom-icon {
     display: block;
     position: absolute;
-    right: -1px;
-    bottom: -1px;
+    right: 0px;
+    bottom: 0px;
     height: 23px;
     width: 23px;
-    border-right: 1px solid #999;
-    border-bottom: 1px solid #999;
     background: url(http://img02.taobaocdn.com/tps/i2/T1uJNuXX8tXXXXXXXX-23-23.png) no-repeat scroll left top transparent;
 }
 

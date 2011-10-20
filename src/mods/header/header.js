@@ -17,8 +17,7 @@
 							bar = '你好，欢迎光临健身商城<a href="#" class="red">登录</a><span class="gray">|</span><a href="#" class="red">注册</a>'
 						};
 						$('#J_Greetbar').html(bar);
-					},
-					['template']);
+					},['template']);
 				},
         fixie6:function(){
           dshop.use('ie6fix',function(){
@@ -38,11 +37,11 @@
 					});
 					$('#J_ShopCart').bind('mouseenter', function(e) {
 						clearTimeout(T);
-						$('#J_ShopCart').addClass('hover1');
+						$('.shop_text').addClass('hover1');
 						$('.shop_on').show();
 					}).bind('mouseleave', function() {
 						T = setTimeout(function() {
-							$('#J_ShopCart').removeClass('hover1');
+							$('.shop_text').removeClass('hover1');
 							$('.shop_on').hide();
 						},
 						100);

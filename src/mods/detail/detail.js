@@ -47,10 +47,50 @@
 					['magnifier', 'loadcss']);
 				},
 				shareinit: function() {
-
+					dshop.use('share', function() {
+						var detailshare = new dshop.mods.share('#J_Share');
+						detailshare.init();
+					},
+					['loadcss', 'template']);
 				},
 				detailtab: function() {
-
+					$('#J_DetailTab>li').click(function() {
+						$('#J_DetailTab>li').removeClass('curr');
+						$(this).addClass('curr');
+					});
+					var wrap = $('#J_DetailContent');
+					$('#J_ProductInfo').click(function() {
+						_fn.info(wrap);
+					});
+					$('#J_ProductComment').click(function() {
+						_fn.comment(wrap);
+					});
+					$('#J_ProductRefer').click(function() {
+						_fn.refer(wrap);
+					});
+					$('#J_ProductAfter').click(function() {
+						_fn.after(wrap);
+					});
+				},
+				info: function(wrap) {
+					dshopmods.use('detailinfo', function() {
+						dshopmods.mods.detailinfo.toview(wrap);
+					});
+				},
+				comment: function(wrap) {
+					dshopmods.use('detailcomment', function() {
+						dshopmods.mods.detailcomment.toview(wrap);
+					});
+				},
+				refer: function(wrap) {
+					dshopmods.use('detailrefer', function() {
+						dshopmods.mods.detailrefer.toview(wrap);
+					});
+				},
+				after: function(wrap) {
+					dshopmods.use('detailafter', function() {
+						dshopmods.mods.detailafter.toview(wrap);
+					});
 				}
 			}
 			return {

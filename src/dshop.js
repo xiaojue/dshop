@@ -12,14 +12,14 @@
  */
 (function(W, $) {
 
-  var debug = (W.location.href.indexOf('debug') == -1) ? false : true ;
+	var debug = (W.location.href.indexOf('debug') == - 1) ? false: true;
 
 	var dependfix = function(host) {
 		this._queue = [];
 		this._queuefn = {};
 		this.mods = {};
 		this.host = host;
-    this.debug = debug;
+		this.debug = debug;
 	};
 
 	dependfix.prototype = {
@@ -29,66 +29,74 @@
 			that._queuefn[name] = mod;
 		},
 		use: function(name, callback, required) {
-      var that = this,map=[],loaded=[],T;
-			if (that._queuefn.hasOwnProperty(name)) {
-				if (callback) callback();
-			} else {
-				var list = [name];
-				if (required) list = list.concat(required);
-				for (var i = 0; i < list.length; i++) {
-					var modname = list[i],
-					filename = that.debug ? '.js':'-min.js';
-					file = that.host + modname + '/' + modname + filename;
-          //过滤已经下载过的
-          if (that._queuefn.hasOwnProperty(modname) || that.mods.hasOwnProperty(modname)){
-            map.push(modname);
-            loaded.push(modname);
-            if(loaded.length==list.length){
-              function checklist(){
-                for(var i=0;i<list.length;i++){
-                  if(!that._queuefn[list[i]]){
-                    T=setTimeout(checklist,500);
-                    break;
-                  }else if(i==list.length-1){
-                    callback();
-                  }
-                }
-              }
-              checklist();
-            }
-            continue;
-          } 
-					(function(modname, index) {
-            that.mods[modname]=modname;  
-						$.getScript(file, function() {
-              map.push(modname);
-              that._queue[index]=that._queuefn[modname];
-              if (map.length == list.length) {
-								for (var j = 0; j < that._queue.length; j++) {
-                  //如果不存在，意思是在45行没取到得到不是function而是undef，那么在全部load之后，不存在重新赋值取一下。
-                  if(!that._queue[j]){
-                    that._queue[j]=that._queuefn[list[j]];
-                  }
-									that._queue[j]();
+			var that = this,
+			map = [],
+			loaded = [];
+			var list = [name];
+			if (required) list = list.concat(required);
+			for (var i = 0; i < list.length; i++) {
+				var modname = list[i],
+				filename = that.debug ? '.js': '-min.js',
+        file = that.host + modname + '/' + modname + filename;
+				//过滤已经下载过的
+				if (that._queuefn.hasOwnProperty(modname) || that.mods.hasOwnProperty(modname)) {
+					map.push(modname);
+					loaded.push(modname);
+					if (loaded.length == list.length) {
+						function checklist() {
+							for (var i = 0; i < list.length; i++) {
+								if (typeof that.mods[list[i]] == 'string') {
+									setTimeout(checklist, 500);
+									break;
+								} else if (i == list.length - 1) {
+									callback();
 								}
-								if (callback) callback();
-								that._queue = [];
 							}
-						});
-					})(modname, i);
-				}
+						}
+						checklist();
+					}
+					continue;
+				} (function(modname, index) {
+					if (!that.mods.hasOwnProperty(modname)) that.mods[modname] = modname;
+					$.getScript(file, function() {
+						map.push(modname);
+						that._queue[index] = that._queuefn[modname];
+						if (map.length == list.length) {
+							for (var j = 0; j < that._queue.length; j++) {
+								//如果不存在，意思是在45行没取到得到不是function而是undef，那么在全部load之后，不存在重新赋值取一下。
+								if (!that._queue[j]) {
+									that._queue[j] = that._queuefn[list[j]];
+								}
+								that._queue[j]();
+							}
+							function checklist() {
+								for (var i = 0; i < list.length; i++) {
+									if (typeof that.mods[list[i]] == 'string') {
+										setTimeout(checklist, 500);
+										break;
+									} else if (i == list.length - 1) {
+										callback();
+									}
+								}
+							}
+							checklist();
+							//if (callback) callback();
+							that._queue = [];
+						}
+					});
+				})(modname, i);
 			}
 		}
 	}
 
-	var host = debug ? 'http://localhost/idmstatic/js/dshop/src/' : 'http://s1.ifiter.com/idmstatic/js/dshop/bulid/',
+	var host = debug ? 'http://localhost/idmstatic/js/dshop/src/': 'http://s1.ifiter.com/idmstatic/js/dshop/bulid/',
 	dshop = new dependfix(host + 'plug/'),
 	dshopmods = new dependfix(host + 'mods/');
 	//要用社区的js的时候,直接引这个http://s1.ifiter.com/static/GM/bulid/GM-min.js?t=20110915.js
 	//社区里的tools部分会不断重写到plug里
 	W.dshop = dshop;
 	W.dshopmods = dshopmods;
-  W.idmjsonp={};
+	W.idmjsonp = {};
 	//关闭ajax缓存,需要时自行开启，然后再自行关闭
 	$.ajaxSetup({
 		cache: true

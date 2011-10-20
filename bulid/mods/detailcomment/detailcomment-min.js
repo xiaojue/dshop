@@ -1,0 +1,1 @@
+(function(a,b){dshopmods.add("detailcomment",function(){var c=function(){return{toview:function(){}}}();dshopmods.mods.detailcomment=c})})(window,jQuery);

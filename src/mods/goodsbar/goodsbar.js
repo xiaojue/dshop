@@ -48,7 +48,25 @@
             });           
          },
          addTrade:function(id){
-
+           dshop.use('cookie',function(){
+               var cid=dshop.mods.cookie('IDMUV');
+              $.ajax({
+              url:'cart/savecartgood.ajax?cid='+cid+'&gid='+id,
+              type:'POST',
+              datatype:'json',
+              success:function(data){
+                console(data);
+                if(data.s==1){
+                  alert('添加购物车成功');
+                }else{
+                  alert(data.msg);
+                }
+              },
+              error:function(){
+                alert('添加购物车失败，请检查网络');
+              }
+              });
+           });
          },
          setCollectCls:function(cls){
             this.collect=cls;

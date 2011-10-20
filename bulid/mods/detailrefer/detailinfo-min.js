@@ -1,0 +1,1 @@
+(function(a,b){dshopmods.add("detailrefer",function(){var c=function(){return{toview:function(){}}}();dshopmods.mods.detailrefer=c})})(window,jQuery);
