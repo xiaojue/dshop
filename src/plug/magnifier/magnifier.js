@@ -32,7 +32,11 @@
             });
           }
 
-          loadkissy();
+          if(!W.KISSY){
+            loadkissy();
+          }else{
+            kissymagnifier();
+          }
           
         };
 

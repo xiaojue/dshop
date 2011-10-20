@@ -29,8 +29,12 @@
                 callback(suggest.core,S);
             });
           }
-
-          loadkissy();
+          
+           if(!W.KISSY){
+            loadkissy();
+          }else{
+            kissysuggest();
+          }
         };
       dshop.mods['suggest']=suggest;
     });

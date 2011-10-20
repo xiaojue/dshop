@@ -98,6 +98,7 @@
 					_fn.picgroup();
 					_fn.shareinit();
 					_fn.detailtab();
+          _fn.info($('#J_DetailContent')); //初始化先加载info内容
 				}
 			}
 		} ();

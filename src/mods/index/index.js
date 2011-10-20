@@ -11,14 +11,17 @@
 					var T;
 					$('#J_AllNav>li').bind('mouseenter', function() {
 						clearTimeout(T);
-						$('#J_AllNav>li').removeClass('active');
+            $('#J_AllNav>li').removeClass('active');
+            $('#J_AllNav>li:not(:last)').removeClass('none');
 						$('.sub_column').hide();
 						$(this).addClass('active');
+            $(this).prev('li').addClass('none');
 						$(this).find('.sub_column').show();
 					}).bind('mouseleave', function() {
 						var that = this;
 						T = setTimeout(function() {
 							$(that).removeClass('active');
+              $(that).prev('li').removeClass('none');
 							$(that).find('.sub_column').hide();
 						},
 						100);
@@ -34,6 +37,7 @@
 						var that = this;
 						T = setTimeout(function() {
 							$(that).closest('li').removeClass('active');
+              $(that).closest('li').prev('li').removeClass('none');
 							$(that).hide();
 						},
 						100);

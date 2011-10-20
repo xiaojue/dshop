@@ -37,7 +37,7 @@
 			for (var i = 0; i < list.length; i++) {
 				var modname = list[i],
 				filename = that.debug ? '.js': '-min.js',
-        file = that.host + modname + '/' + modname + filename;
+				file = that.host + modname + '/' + modname + filename;
 				//过滤已经下载过的
 				if (that._queuefn.hasOwnProperty(modname) || that.mods.hasOwnProperty(modname)) {
 					map.push(modname);
@@ -67,7 +67,7 @@
 								if (!that._queue[j]) {
 									that._queue[j] = that._queuefn[list[j]];
 								}
-								that._queue[j]();
+                if(that._queue[j]) that._queue[j]();
 							}
 							function checklist() {
 								for (var i = 0; i < list.length; i++) {
