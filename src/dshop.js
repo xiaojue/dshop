@@ -20,6 +20,7 @@
 		this.mods = {};
 		this.host = host;
 		this.debug = debug;
+    this.KISSYLOAD=false;
 	};
 
 	dependfix.prototype = {

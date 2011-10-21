@@ -6,8 +6,10 @@
  */
 (function(W,$){
     dshop.add('suggest',function(){
+      var T;
       var suggest=function(callback){
           var loadkissy=function(){
+            dshop.KISSYLOAD=true;
               if(!suggest.core){
                 var kissymin='http://a.tbcdn.cn/s/kissy/1.2.0/kissy-min.js';
                 $.getScript(kissymin,function(){
@@ -30,11 +32,17 @@
             });
           }
           
-           if(!W.KISSY){
+          if(!dshop.KISSYLOAD){
             loadkissy();
           }else{
-            kissysuggest();
-          }
+            T=setInterval(function(){
+              if(W.KISSY){
+                kissysuggest();
+                clearInterval(T);
+              }
+              },500);
+          };
+
         };
       dshop.mods['suggest']=suggest;
     });

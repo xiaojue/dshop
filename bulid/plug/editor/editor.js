@@ -2,6 +2,7 @@
  * @author fuqiang[designsor@gmail.com]
  * @version 20110929
  * @fileoverview 动米网编辑器，这里做中转处理，引入淘宝CDN的编辑器，使用默认配置，不支持多图上传，插入视频等高级功能，暂时是默认基础版本
+ * 不能和其他kissy组件共存，bug未修复
  */
 (function(W,$){
     dshop.add('editor',function(){

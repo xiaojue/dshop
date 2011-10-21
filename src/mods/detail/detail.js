@@ -23,7 +23,7 @@
 							var nowpic = $('#J_PicGroup .active>img').attr('data-picy'),
 							bigpic = $('#J_PicGroup .active>img').attr('data-picb');
 							$('#J_Zoom').html('<img src="' + nowpic + '" width="" height="298" width="298" id="J_Zoompic">');
-							var Zoom = new zoom({
+							var picZoom = new zoom({
 								imageNode: '#J_Zoompic',
 								align: {
 									node: '#J_Zoompic',
@@ -32,6 +32,7 @@
 								},
 								bigImageSrc: bigpic
 							});
+
 							$('#J_PicGroup li>img').live('click', function() {
 								var pic = $(this).attr('data-picy'),
 								bpic = $(this).attr('data-picb');
@@ -40,7 +41,7 @@
 								$(this).parent('li').addClass('active');
 								$(this).after('<div id="J_Triangle" class="spec_ico mall"></div>');
 								$('#J_Zoompic').attr('src', pic);
-								Zoom.set('bigImageSrc', bpic)
+								picZoom.set('bigImageSrc', bpic)
 							});
 						});
 					},

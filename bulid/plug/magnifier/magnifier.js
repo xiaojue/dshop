@@ -5,9 +5,10 @@
  */
 (function(W,$){
     dshop.add('magnifier',function(){
-        
+        var T;
         var magnifier=function(callback){
           var loadkissy=function(){
+            dshop.KISSYLOAD=true;
             if(!magnifier.core){
               var kissymin='http://a.tbcdn.cn/s/kissy/1.2.0/kissy-min.js';
               $.getScript(kissymin,function(){
@@ -32,12 +33,16 @@
             });
           }
 
-          if(!W.KISSY){
+          if(!dshop.KISSYLOAD){
             loadkissy();
           }else{
-            kissymagnifier();
+            T=setInterval(function(){
+                if(W.KISSY){
+                  kissymagnifier();    
+                  clearInterval(T);
+                }
+            },500);
           }
-          
         };
 
         dshop.mods['magnifier']=magnifier;

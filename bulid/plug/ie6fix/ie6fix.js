@@ -35,21 +35,21 @@
               $(this).removeClass(cls);
             });
 				},
-				tabledistance: function(table,clsobj) {
+				istance: function(selector,clsobj) {
           var _clsobj={
             evencls:'',
             oddcls:''
           };
           $.extend(_clsobj,clsobj);
-          $(table+':odd').addClass(_clsobj.oddcls);
-          $(table+':even').addClass(_clsobj.evencls);
+          $(selector+':odd').addClass(_clsobj.oddcls);
+          $(selector+':even').addClass(_clsobj.evencls);
 				}
       };
-			doc.execCommand("BackgroundImageCache", false, true); //修复ie6 不缓存背景图 
+      if(doc.execCommand) doc.execCommand("BackgroundImageCache", false, true); //修复ie6 不缓存背景图 
 			return {
 				fixpng: fn.fixpng,
 				addhover: fn.addhover,
-				tabledistance: fn.tabledistance
+				istance: fn.istance
 			}
 		} ();
 
