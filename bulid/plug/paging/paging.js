@@ -7,7 +7,8 @@
 	dshop.add('paging', function() {
 		var paging = function(cg) {
 			var _cg = {
-				count: null,
+        count:null,
+        onepagesize:10, //一页10个
 				current: 1,
 				clsname: 'page',
 				currentcls: 'active',
@@ -34,6 +35,7 @@
 				startsize = current - Math.floor(viewsize / 2);
 				//生成一个数码渲染数组对象
 				if (startsize <= 0) startsize = 1;
+        if(viewsize>count) viewsize=count;
 				for (var i = 0; i < viewsize; i++) {
 					if (startsize + i > count) break;
 					var temp = {
@@ -75,10 +77,11 @@
 				prev = {
 					text: '上一页'
 				};
-				if (n[1]['text'] == '..') {
+
+				if (n[1] && n[1]['text'] == '..') {
 					returnobject['prev'] = prev;
 				}
-				if (n[n.length - 2]['text'] == '..') {
+				if (n[n.length-2] && n[n.length - 2]['text'] == '..') {
 					returnobject['next'] = next;
 				}
 				returnobject.n = n;
@@ -109,8 +112,10 @@
 					return false;
 				});
 			},
-			rebulid: function(count, current) {
+			rebuild: function(count, current) {
 				var that = this,
+        cg=that.cg,      
+        count=Math.ceil(cg.count/cg.onepagesize),
 				pagobject = _fn.createtempobject(count, current, that.cg),
 				paghtml = dshop.mods.template.to_html(that.cg.template, pagobject);
 				$(that.cg.wrapid).html(paghtml);
@@ -118,7 +123,7 @@
 			init: function() {
 				var that = this,
 				cg = that.cg,
-				pagobject = _fn.createtempobject(cg.count, cg.current, cg),
+				pagobject = _fn.createtempobject(Math.ceil(cg.count/cg.onepagesize), cg.current, cg),
 				paghtml = dshop.mods.template.to_html(cg.template, pagobject);
 				$(cg.wrap).html('<div id="' + cg.wrapid.slice(1) + '" class="'+cg.clsname+'" style="'+cg.inlinestyletext+'"></div>');
 				$(cg.wrapid).html(paghtml);

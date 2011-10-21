@@ -14,19 +14,18 @@
           var test1=new dshop.mods.paging({
             wrap:'#J_Pag',
             prevfn:function(current){
-              test1.rebulid(100,current);
+              test1.rebuild(100,current);
               console.log(test1.current)
             },
             nextfn:function(current){
               console.log(current)
-              test1.rebulid(100,current);
+              test1.rebuild(100,current);
             },
             sizeclick:function(current){
-              test1.rebulid(100,current);
+              test1.rebuild(100,current);
             }
           });
-          test1.setattr('count',100);
-          test1.setattr('current',1);
+          test1.setattr('count',65);
           test1.init();
         },['template']); 
       })();
