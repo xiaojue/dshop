@@ -9,6 +9,7 @@
 			var Goods = GLOBAL_GOODS || {},
 			isRealputs, isInit, _fn = {
 				getdata: function(wrap, callback) {
+          wrap.append('<div id="J_AJAXAFTER"></div>');
 					$.ajax({
 						url: '/goods/sale/' + Goods.id,
 						success: function(data) {
@@ -20,7 +21,6 @@
 					});
 				},
 				handledata: function(wrap, html) {
-					wrap.append('<div id="J_AJAXAFTER"></div>');
 					$('#J_AJAXAFTER').html(html);
 					isRealputs = true;
 					_fn.toggle(wrap);
