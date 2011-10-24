@@ -1,0 +1,31 @@
+<html>
+  <head>
+    <title>test</title>
+    <script src="http://s1.ifiter.com/static/GM/jquery/jquery-1.6.2.min.js"></script>
+    <script src="http://localhost/idmstatic/js/dshop/src/dshop.js"></script>
+    <link type="text/css" rel="stylesheet" href="http://s1.ifiter.com/dianshang/static/base.css">
+    <link type="text/css" rel="stylesheet" href="http://s1.ifiter.com/dianshang/static/main.css">
+  </head>
+  <body>
+    <div id="J_Scrollbox" style="width:750px;">
+    </div>
+    <script>
+      (function(){
+        var AcrossWidget={
+          title:'我最近看过的商品',
+          data:[
+          {pic:'xxx.jpg',title:'MOB脉搏健身卡 不限制次数带游泳瑜伽全市…',price:'290.00',url:'http://www.xxx.com/xxx/'},
+          {pic:'xxx.jpg',title:'MOB脉搏健身卡 不限制次数带游泳瑜伽全市…',price:'290.00',url:'http://www.xxx.com/xxx/'},
+          {pic:'xxx.jpg',title:'MOB脉搏健身卡 不限制次数带游泳瑜伽全市…',price:'290.00',url:'http://www.xxx.com/xxx/'},
+          {pic:'xxx.jpg',title:'MOB脉搏健身卡 不限制次数带游泳瑜伽全市…',price:'290.00',url:'http://www.xxx.com/xxx/'},
+          {pic:'xxx.jpg',title:'MOB脉搏健身卡 不限制次数带游泳瑜伽全市…',price:'290.00',url:'http://www.xxx.com/xxx/'}
+          ]
+        };
+        dshopmods.use('scrollbox',function(){
+          var box=new dshopmods.mods.scrollbox('#J_Scrollbox',AcrossWidget);
+          box.init();
+        }); 
+      })();
+    </script> 
+  </body>
+</html>
