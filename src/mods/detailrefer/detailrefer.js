@@ -43,10 +43,10 @@
                   success:function(data){
                     try{
                         var ret=eval('('+data+')');
-                        if(data.s==1){ //成功
-                          alert(data.msg);
+                        if(ret.s==1){ //成功
+                          alert(ret.msg);
                         }else{
-                          alert(data.msg);
+                          alert(ret.msg);
                         }
                     }catch(e){
                       alert(e);
@@ -77,16 +77,24 @@
 						idmjsonp.detailrefer = function(data) {
               if(!isInitrefer){
               isInitrefer=true;
+              function changecls(current){
+                 $('#J_MYREFERPAG a').removeClass('active');
+                 $('#J_MYREFERPAG a:contains('+current+')').addClass('active');     
+              } 
               Mydetailrefer=new dshop.mods.paging({
                   wrap:'#J_MYREFERPAG',
                   prevfn:function(current){
-                    _fn/postdata(Goods.id,current-1);
+                    _fn.postdata(Goods.id,current-1);
+                     changecls(current-1);
                   },
                   nextfn:function(current){
                     _fn.postdata(Goods.id,current + 1);
+                    changecls(current+1);
                   },
-                  sizeclick:function(current){
+                  sizeclick:function(current,node){
                     _fn.postdata(Goods.id,current);
+                     changecls(current);
+                    
                   }
                 });
 							var htmls = data.s,

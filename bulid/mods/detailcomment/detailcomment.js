@@ -48,16 +48,23 @@
 						idmjsonp.detailcomment = function(data) {
 							if (!isInitComment) {
 								isInitComment = true;
+                function changecls(current){
+                 $('#J_COMMENTPAG a').removeClass('active');
+                 $('#J_COMMENTPAG a:contains('+current+')').addClass('active');     
+                }
                 Mydetailcomment = new dshop.mods.paging({
 									wrap: '#J_COMMENTPAG',
 									prevfn: function(current) {
 										_fn.postdata(Goods.id, current - 1);
+                    changecls(current-1);
 									},
 									nextfn: function(current) {
 										_fn.postdata(Goods.id, current + 1);
+                    changecls(current+1);
 									},
 									sizeclick: function(current) {
 										_fn.postdata(Goods.id, current);
+                    changecls(current);
 									}
 								});
 								var htmls = data.s,

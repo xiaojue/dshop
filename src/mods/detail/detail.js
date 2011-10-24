@@ -54,6 +54,59 @@
 					},
 					['loadcss', 'template']);
 				},
+        shopcartinit:function(){
+           //先校验是否能加入购物车
+           var choosetypes=$('.J_Chosetype'),Stock=parseInt($('#J_Stock').text());
+           if(choosetypes.length!=0){
+             choosetypes.find('a').live('click',function(){
+                 $(this).closest('.J_Chosetype').find('a').removeClass('active');
+                 $(this).addClass('active');    
+            });
+           }
+           $('#J_ChoseNum').val(1).keyup(function(){
+               var val=$.trim($(this).val());
+               if(isNaN(val) || val=="") $(this).val(1);
+               if(parseInt(val)>Stock) $(this).val(Stock);
+             });
+           $('#J_AddShopCart').live('click',function(){
+               var valobj={},appendDesc={},typeready=true;
+               choosetypes.each(function(){
+                    var choose=$(this).find('.active');
+                    if(choose.length==0){
+                      typeready=false;
+                      return false;
+                    }else{
+                      var type=choose.attr('data-type');
+                      appendDesc[type]=$.trim(choose.text());
+                    }
+                });
+                if(typeready){
+                  var ChoseNum=$('#J_ChoseNum');
+                  if(!isNaN(parseInt($.trim(ChoseNum.val())))) ChoseNum.val(parseInt($.trim(ChoseNum.val())));
+                  var nu=parseInt(ChoseNum.val());
+                  if(isNaN(nu)){
+                    alert('数量必须是数字');
+                  }else if(nu<=0){
+                    alert('数量不能为负');
+                  }else if(nu>Stock){
+                    alert('对不起，购买数量不能大于库存数');
+                  }else{
+                    if(appendDesc.length==0) appendDesc='';
+                    valobj['appendDesc']=appendDesc;
+                    valobj['gCount']=nu;
+                    _fn.addshopcart(valobj);
+                  }
+                }else{
+                  alert('请选择商品的类型');
+                }
+           }); 
+        },
+        addshopcart:function(data){
+          console.log(data);
+        },
+        favoriteinit:function(){
+
+        },
 				detailtab: function() {
 					$('#J_DetailTab>li').click(function() {
 						$('#J_DetailTab>li').removeClass('curr');
@@ -108,6 +161,7 @@
 			}
 			return {
 				init: function() {
+          _fn.shopcartinit();
 					_fn.picgroup();
 					_fn.shareinit();
 					_fn.detailtab();
