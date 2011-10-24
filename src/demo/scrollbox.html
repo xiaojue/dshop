@@ -24,6 +24,9 @@
         dshopmods.use('scrollbox',function(){
           var box=new dshopmods.mods.scrollbox('#J_Scrollbox',AcrossWidget);
           box.init();
+          dshop.use('JSON',function(){
+            console.log(AcrossWidget.toJSONString())
+          });
         }); 
       })();
     </script> 
