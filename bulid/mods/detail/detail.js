@@ -58,6 +58,7 @@
 					$('#J_DetailTab>li').click(function() {
 						$('#J_DetailTab>li').removeClass('curr');
 						$(this).addClass('curr');
+            _fn.addloading();
 					});
 					var wrap = $('#J_DetailContent');
 					$('#J_ProductInfo').click(function() {
@@ -72,7 +73,18 @@
 					$('#J_ProductAfter').click(function() {
 						_fn.after(wrap);
 					});
+          //给分页增加loading
+          $('#J_MYREFERPAG a,#J_COMMENTPAG a').live('click',function(){
+             _fn.addloading();
+            });
 				},
+        addloading:function(){
+          if($('#J_detailLoading').length==0){
+            $('#J_DetailContent').append('<div id="J_detailLoading" style="padding:30px;text-align:center;"><img src="http://s1.ifiter.com/static/images/loading.gif" alt="loading"><br/>正在加载数据...</div>');
+          }else{
+            $('#J_detailLoading').show();
+          }
+        },
 				info: function(wrap) {
 					dshopmods.use('detailinfo', function() {
 						dshopmods.mods.detailinfo.toview(wrap);
@@ -100,6 +112,7 @@
 					_fn.shareinit();
 					_fn.detailtab();
 					_fn.info($('#J_DetailContent')); //初始化先加载info内容
+          _fn.addloading();
 				}
 			}
 		} ();

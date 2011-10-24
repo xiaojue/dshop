@@ -9,11 +9,16 @@
 
 			var Goods = GLOBAL_GOODS || {},
 			isInit, isRealputs, 
-			Mydetailcomment;
+			Mydetailcomment,oneget=true;
 
 			var _fn = {
 				postdata: function(id, pageNo) {
-            $.getScript('http://dshop.idongmi.com/hudong/getComments.json?gid=' + id + '&pageNo=' + pageNo + '&callback=idmjsonp.detailcomment&t='+new Date().valueOf());
+          if(oneget){
+            oneget=false;
+            $.getScript('http://dshop.idongmi.com/hudong/getComments.json?gid=' + id + '&pageNo=' + pageNo + '&callback=idmjsonp.detailcomment&t='+new Date().valueOf(),function(){
+                  oneget=true;
+              });
+          }
 				},
 				cratestar: function(starlevel) {
 					var sl = Math.floor(parseFloat(starlevel)),
@@ -91,6 +96,8 @@
               }
               $('.assess_list:odd').addClass('assess_two');
 							$('.assess_list:last').addClass('last').removeClass('assess_two');
+              //清loading
+              $('#J_detailLoading').hide();
 						};
 
 						_fn.postdata(Goods.id, 1);
