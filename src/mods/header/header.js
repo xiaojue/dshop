@@ -95,8 +95,11 @@
 					});
 				},
 				shopcart: function() {
+          $('#J_GoCart').live('click',function(){
+              W.location.href='/cart/cartlist';
+            });
 					dshop.use('template', function() {
-						var html = '{{#s}}' + '<dl>' + '<dt><a href="{{goodsId}}"><img src="{{smallPicture}}" alt="{{goodsName}}" title="{{goodsName}}"></a></dt>' + '<dd>' + '<div><a class="gray1" href="{{goodsId}}">{{goodsName}}</a></div>' + '<div class="st"><a href="javascript:void(0)" data-id="{{goodsId}}" class="J_CartDel">删除</a>¥<font>{{price}}</font></div>' + '</dd>' + '</dl>' + '{{/s}}' + '<div class="shop_set">{{#s}}<input type="button" class="mall">购物车中共有 {{count}} 件商品{{/s}}{{^s}}购物车里什么也没有呢，快去随便逛逛？{{/s}}</div>';
+						var html = '{{#s}}' + '<dl>' + '<dt><a href="/goods/{{goodsId}}"><img src="{{smallPicture}}" alt="{{goodsName}}" title="{{goodsName}}"></a></dt>' + '<dd>' + '<div><a class="gray1" href="/goods/{{goodsId}}">{{goodsName}}</a></div>' + '<div class="st"><a href="javascript:void(0)" data-cartid="{{id}}" class="J_CartDel">删除</a>¥<font>{{price}}</font></div>' + '</dd>' + '</dl>' + '{{/s}}' + '{{#hasGoods}}<div class="shop_set"><input type="button" class="mall" id="J_GoCart">购物车中共有 {{count}} 件商品{{/hasGoods}}{{^hasGoods}}购物车里什么也没有呢，快去随便逛逛？{{/hasGoods}}</div>';
 						function inithandle() {
 							var setting = {
 								count: 0,
@@ -108,26 +111,27 @@
 
 						inithandle();
 						idmjsonp.cart = function(data) {
+              if(data.s.length!=0){
+                data.hasGoods=true;
+              }
 							var result = dshop.mods.template.to_html(html, data);
 							$('#J_ShopCartWrap').html(result);
-							$('#J_CartN').html(data['count'])
+              $('#J_CartN').html(data['count']);
 						};
-						var id = dshop.mods.cookie('IDMUV');
-						$.getScript('http://dshop.idongmi.com/cart/getCart.json?callback=idmjsonp.cart&pageNo=1&cid=' + id);
+						$.getScript('http://dshop.idongmi.com/cart/getCart.json?callback=idmjsonp.cart&pageNo=1');
 						$('.J_CartDel').live('click', function() {
-							var shopid = $(this).attr('data-id'),
+							var cartid = $(this).attr('data-cartid'),
 							node = $(this);
 							$.ajax({
 								url: '/cart/delcartgood.ajax',
 								type: 'POST',
 								data: {
-									cid: id,
-									gid: shopid
+									id: cartid
 								},
 								success: function(data) {
                   var ret = $.trim(data),data=eval('('+ret+')');
 									if (data.s == 1) {
-										node.closest('dl').remove();
+                    $.getScript('http://dshop.idongmi.com/cart/getCart.json?callback=idmjsonp.cart&pageNo=1');
 									} else if (data.s == 0) {
                     alert(data.msg);
 									}
@@ -137,8 +141,7 @@
 								}
 							});
 						});
-					},
-					['cookie']);
+					});
 				},
 				init: function() {
 					var that = this;

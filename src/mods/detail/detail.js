@@ -155,6 +155,8 @@
 									}
 									$('#J_Deatildeal').hide();
 									$('#J_ShopCartSuccess').html(temp).show();
+                  //更新一下header
+                  $.getScript('http://dshop.idongmi.com/cart/getCart.json?callback=idmjsonp.cart&pageNo=1');
 								});
 							} else {
 								alert(data.msg);
@@ -182,7 +184,7 @@
 								};
 								if (ret.s == 1) {
 									dshop.use('template', function() {
-										var favtemp = '<div class="scart ks_clear"> <div class="scart1_l"><span class="mall"></span></div> <div class="scart_r"> <div class="scart_tittle">商品已成功加入购物车</div> <div>收藏夹中共有{{count}}件商品</div> <div class="scart_but"> <input value="继续购物" class="J_Backtodeal scart_box1 mall" type="button"> </div> </div> </div>';
+										var favtemp = '<div class="scart ks_clear"> <div class="scart1_l"><span class="mall"></span></div> <div class="scart_r"> <div class="scart_tittle">商品已成功加入收藏夹</div> <div>收藏夹中共有{{count}}件商品</div> <div class="scart_but"> <input value="继续购物" class="J_Backtodeal scart_box1 mall" type="button"> </div> </div> </div>';
                     favtemp=dshop.mods.template.to_html(favtemp,ret);
                     if($('#J_FavSuccess').length==0){
                       $('#J_Deatildeal').after('<div id="J_FavSuccess" class="choose"></div>');
