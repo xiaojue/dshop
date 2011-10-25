@@ -123,20 +123,20 @@
 						}
 					});
 
-          $('#J_Backtodeal').live('click',function(){
-              $('#J_ShopCartSuccess').hide();
-              $('#J_Deatildeal').show();
-          });
-        $('#J_GoCart').live('click',function(){
-            W.location.href='/cart/cartlist';
-          })
+					$('.J_Backtodeal').live('click', function() {
+						$('#J_ShopCartSuccess,#J_FavSuccess').hide();
+						$('#J_Deatildeal').show();
+					});
+					$('#J_GoCart').live('click', function() {
+						W.location.href = '/cart/cartlist';
+					})
 				},
 				addshopcart: function(data) {
 					data['gid'] = Goods.id;
 					$.ajax({
 						url: '/cart/savecartgood.ajax',
 						data: data,
-            type:'POST',
+						type: 'POST',
 						success: function(ret) {
 							//{"s":1||0,"msg":"","count":0,"countprice":0.0}
 							try {
@@ -146,16 +146,15 @@
 							}
 							if (data.s == 1) {
 								dshop.use('template', function() {
-									var temp = '<div class="scart ks_clear">' + '<div class="scart_l"><span class="mall"></span></div>' + '<div class="scart_r">' + '<div class="scart_tittle">商品已成功加入购物车</div>' + '<div>购物车共有 {{count}}件商品，合计：&yen;{{countprice}}元</div>' + '<div class="scart_but">' + '<input type="button" class="scart_box1 mall" value="继续购物" id="J_Backtodeal">' + '<input type="button" class="scart_box2 mall" value="去结算" id="J_GoCart">' + '</div>' + '</div>' + '</div>';
+									var temp = '<div class="scart ks_clear">' + '<div class="scart_l"><span class="mall"></span></div>' + '<div class="scart_r">' + '<div class="scart_tittle">商品已成功加入购物车</div>' + '<div>购物车共有 {{count}}件商品，合计：&yen;{{countprice}}元</div>' + '<div class="scart_but">' + '<input type="button" class="scart_box1 mall J_Backtodeal" value="继续购物">' + '<input type="button" class="scart_box2 mall" value="去结算" id="J_GoCart">' + '</div>' + '</div>' + '</div>';
 
 									temp = dshop.mods.template.to_html(temp, data);
 
-									if ($('#J_ShopCartSuccess').length == 0){
-                    $('#J_Deatildeal').after('<div id="J_ShopCartSuccess" class="choose"></div>');
-                  }
-                  $('#J_Deatildeal').hide();
-									$('#J_ShopCartSuccess').html(temp);
-                  $('#J_ShopCartSuccess').show();
+									if ($('#J_ShopCartSuccess').length == 0) {
+										$('#J_Deatildeal').after('<div id="J_ShopCartSuccess" class="choose"></div>');
+									}
+									$('#J_Deatildeal').hide();
+									$('#J_ShopCartSuccess').html(temp).show();
 								});
 							} else {
 								alert(data.msg);
@@ -168,7 +167,38 @@
 
 				},
 				favoriteinit: function() {
-
+					$('#J_AddFavorite').live('click', function() {
+						$.ajax({
+							url: '/hudong/setFavGoods.ajax',
+							data: {
+								goodsid: Goods.id
+							},
+							type: 'POST',
+							success: function(data) {
+								try {
+									var ret = eval('(' + data + ')');
+								} catch(e) {
+									alert(e);
+								};
+								if (ret.s == 1) {
+									dshop.use('template', function() {
+										var favtemp = '<div class="scart ks_clear"> <div class="scart1_l"><span class="mall"></span></div> <div class="scart_r"> <div class="scart_tittle">商品已成功加入购物车</div> <div>收藏夹中共有{{count}}件商品</div> <div class="scart_but"> <input value="继续购物" class="J_Backtodeal scart_box1 mall" type="button"> </div> </div> </div>';
+                    favtemp=dshop.mods.template.to_html(favtemp,ret);
+                    if($('#J_FavSuccess').length==0){
+                      $('#J_Deatildeal').after('<div id="J_FavSuccess" class="choose"></div>');
+                    }
+                    $('#J_Deatildeal').hide();
+                    $('#J_FavSuccess').html(favtemp).show();
+									});
+								} else {
+									alert(ret.msg);
+								}
+							},
+							error: function() {
+								alert('网络原因，请尝试重新收藏');
+							}
+						});
+					});
 				},
 				detailtab: function() {
 					$('#J_DetailTab>li').click(function() {
@@ -225,6 +255,7 @@
 			return {
 				init: function() {
 					_fn.shopcartinit();
+          _fn.favoriteinit();
 					_fn.picgroup();
 					_fn.shareinit();
 					_fn.detailtab();

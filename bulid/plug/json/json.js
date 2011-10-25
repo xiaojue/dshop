@@ -17,11 +17,11 @@
 				ObjTostr: function(obj) {
 					var json = [];
 					for (var i in obj) {
-						if (!this.hasOwnProperty(i)) continue;
+						if (!obj.hasOwnProperty(i)) continue;
 						//if(typeof this[i] == "function") continue;  
-						json.push(toJSON(i) + " : " + ((this[i] != null) ? toJSON(this[i]) : "null"))
+						json.push(toJSON(i) + ":" + ((obj[i] != null) ? toJSON(obj[i]) : "null"))
 					}
-					return "{\n " + json.join(",\n ") + "\n}";
+					return "{" + json.join(",") + "}";
 				}
 			}
 		} ();
