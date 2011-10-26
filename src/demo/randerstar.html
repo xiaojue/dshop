@@ -1,0 +1,31 @@
+<html>
+  <head>
+    <title>test</title>
+    <script src="http://s1.ifiter.com/static/GM/jquery/jquery-1.6.2.min.js"></script>
+    <script src="http://localhost/idmstatic/js/dshop/src/dshop.js"></script>
+    
+  </head>
+  <body>
+    <div id="star1">
+    </div>
+    <div id="star2">
+    </div>
+    <script>
+      (function(){
+        dshop.use('randerstar',function(){
+          var test1=new dshop.mods.randerstar({
+            radioname:'test1',
+            target:'#star1'
+          });
+          test1.init();
+          var test2=new dshop.mods.randerstar({
+            radioname:'test2',
+            target:'#star2',
+            current:2
+          });
+          test2.init();
+        }); 
+      })();
+    </script> 
+  </body>
+</html>
