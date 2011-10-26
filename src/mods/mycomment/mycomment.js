@@ -40,7 +40,7 @@
         initAppendDesc:function(){
           $('.J_AppendDesc').each(function(){
               var apd=$(this).attr('data-jsonstr');
-              if(apd!='null'){
+              if(apd!='null' && apd!=''){
                 var str=_fn.AppendDescinstant(apd);
                 $(this).html(str);
               }
@@ -63,6 +63,7 @@
              for(var i=0;i<radioready.length;i++){
                 if(radioready[i]!='checked'){
                   $('.J_Stars').eq(i).find('.J_StarMsg').text('请选择星级').addClass('red');
+                  alert('请选择星级');
                   return false;
                 }
               };

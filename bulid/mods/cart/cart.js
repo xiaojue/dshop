@@ -65,7 +65,7 @@
             });
           $('#J_CartTable .J_AppendDesc').each(function(){
               var str=$(this).val();
-              if(str!='null'){
+              if(str!='null' && str!=''){
                 $(this).closest('tr').find('.J_CartName').after('<div class="gray1">'+_fn.AppendDescinstant(str)+'</div>');
               }
             })
