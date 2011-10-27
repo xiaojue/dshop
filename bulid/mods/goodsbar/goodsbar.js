@@ -84,7 +84,7 @@
             return;
           }
 					$.ajax({
-						url: 'cart/savecartgood.ajax',
+						url: '/cart/savecartgood.ajax',
 						data: {
 							gCount: 1,
 							gid: id

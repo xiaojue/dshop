@@ -65,7 +65,9 @@
             });
           $('#J_DeleteAll').live('click',function(){
               var msg='是否全部删除购物车';
-              return confirm(msg);
+              if(confirm(msg)==true){
+                $('#J_delForm').submit();
+              }
           });
           $('#J_CartTable .J_AppendDesc').each(function(){
               var str=$(this).val();
