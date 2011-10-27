@@ -55,7 +55,24 @@
 					$(e).parent().append(html);
 
 				},
+        createReasonDom:function(target,data){
+          var that=this,ulhtml='<ul>';
+           $.each(data,function(k,v){
+               ulhtml+='<li><label><input type="radio" value="'+k+'" name="reasonTitle">'+k+'</li></label>';  
+               var liststr='';
+               for(var i=0;i<v.length;i++){
+                 liststr+='<option value="'+v[i]+'">'+v[i]+'</option>';
+               };
+               that._listobj[k]=liststr;
+           });
+         ulhtml+='</ul>';
+         var selecthtml='<select id="J_reasonList" size="9"></select>';
+         $(target).html(ulhtml+selecthtml);
+         var firstkey=$('input[name="reasonTitle"]:first').attr('checked','checked').val();
+         $('#J_reasonList').html(that._listobj[firstkey]);
+        },
 				bindEvent: function() {
+          var that=this;
 					$('.J_SelectBtn').live('click', function() {
 						var size = $(this).parent().find('.J_Count').val(),
 						index = $(this).closest('.barter_list').index('.barter_list');
@@ -72,13 +89,19 @@
 						s = parseInt(size.val());
 						if (s - 1 > 0) size.val(s - 1);
 					});
+        $('input[name="reasonTitle"]').live('click',function(){
+            $('#J_reasonList').html(that._listobj[this.value]);
+          });
 				}
 			};
 
 			return {
 				init: function() {
-					_fn.bindEvent();
-				}
+					this._bindEvent();
+				},
+        _listobj:{},
+        _bindEvent:_fn.bindEvent,
+        bulidReason:_fn.createReasonDom
 			}
 		} ();
 		//<input type="hidden" value="<%=goods.getGoodsCount()%>" class="J_Count">
