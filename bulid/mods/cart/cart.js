@@ -23,7 +23,7 @@
         },
         incatr:function(n,id){
           $.ajax({
-            url:'/cart/inccartgood.ajax',
+            url:'/cart/updatacartgood.ajax',
             data:{
               inc:n.join(','),
               id:id.join(',')
@@ -63,6 +63,10 @@
               _fn.incatr(narr,idarr);
               return false;
             });
+          $('#J_DeleteAll').live('click',function(){
+              var msg='是否全部删除购物车';
+              return confirm(msg);
+          });
           $('#J_CartTable .J_AppendDesc').each(function(){
               var str=$(this).val();
               if(str!='null' && str!=''){
