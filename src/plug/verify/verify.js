@@ -27,7 +27,7 @@
 				trim: true,
 				checktrue: null,
 				focusfn: null,
-				attrname: 'data-v' //data-v functionname:msg:arg.arg|functionname:msg:arg.arg
+				attrname: 'data-v' //data-v functionname:msg:arg,arg|functionname:msg:arg,arg
 			}
 
 			var _rule = {
@@ -43,13 +43,23 @@
 					if (val.length < min || val.length > max) return false;
 					return true;
 				},
+        selected:function(val){
+          if(val==0 || val=="" || val==undefined || val==null) return false;
+          return true;
+        },
 				n: function(val, min, max) {
 					if (val < min || val > max) return false;
 					return true;
 				},
+        zip:function(val){
+          return (/^\d{6}$/).test(val);
+        },
 				phone: function(val) {
-					return (/^(?:13\d|15\d|18\d)-?\d{5}(\d{3}|\*{3})$/).test(val)
+          return (/^(?:13\d|15\d|18\d)-?\d{5}(\d{3}|\*{3})$/).test(val);
 				},
+        tel:function(val){
+          return (/^[+]{0,1}(\d){1,4}[ ]{0,1}([-]{0,1}((\d)|[ ]){1,12})+$/).test(val);
+        },
 				email: function(val) {
 					return (/^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+((\.[a-zA-Z0-9_-]{2,3}){1,2})$/).test(val);
 				},
@@ -57,6 +67,10 @@
 					if (val != $(selected).val()) return false;
 					return true;
 				},
+        same:function(val,sameval){
+          if(val == sameval) return false;
+          return true;
+        },
 				checked: function(val, node) {
 					if (!$(node).attr('checked')) return false;
 					return true;
@@ -74,6 +88,8 @@
 			this.rule = _rule;
 			this.config = _config;
 			this.data = {};
+
+      dshop.mods.verify.rule=_rule;
 		}
 
 		verify.prototype = {
@@ -181,8 +197,8 @@
 						rulevalobj[i]['arg'].splice(0, 0, val);
 						var examine = that.rule[i].apply(this, rulevalobj[i]['arg']);
 						if (!examine) {
-							if (cg.batchcallback) cg.batchcallback(val, rulevalobj[i]['msg'], node);
 							flg = false;
+							if (cg.batchcallback) cg.batchcallback(val, rulevalobj[i]['msg'], node);
 							break;
 						} else {
 							var node = $(this);

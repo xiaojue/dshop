@@ -19,6 +19,9 @@
         cityzone.prototype={
             init:function(){
               var that=this,cg=that.config;
+                if(that.city && that.zone && cg.datasuccess){
+                  cg.datasuccess(cityzone.city,cityzone.zone);
+                }
                 //获取远程数据,处理数据成obj格式
                 $.getScript(cg.data,function(){
                     var city=function(){
@@ -39,7 +42,9 @@
                       }
                       return temobj;
                     }();
-                    if(cg.datasuccess) cg.datasuccess(city,zone);
+                    that.city=city;
+                    that.zone=zone;
+                    if(cg.datasuccess) cg.datasuccess(that.city,that.zone);
                 });
             }
         }

@@ -60,6 +60,10 @@
                   narr.push($(this).val());
                   idarr.push($(this).attr('data-id'));
                 });
+              if(narr.length==0 || idarr.length==0){
+                alert('购物车里还没有商品');
+                return false;
+              }
               _fn.incatr(narr,idarr);
               return false;
             });
