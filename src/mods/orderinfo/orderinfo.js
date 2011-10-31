@@ -296,7 +296,7 @@
             $("input[name='address']:checked").closest(".adress").find("label>span").each(function(){
               addressVal.push($(this).text());
             });
-            addressVal=addressVal.join(" ");
+            addressVal=encodeURIComponent(addressVal.join(" "));
             var deliveryTimeVal=$("input[name='deliveryTime']:checked").val(),
                 paytypeVal=$("input[name='paytype']:checked").val(),
                 isNeedbill=$("input[name='needbill']").val(),
