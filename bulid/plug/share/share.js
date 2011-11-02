@@ -15,7 +15,7 @@
               order:['tsina','qzone','tqq','renren','douban','kaixin','taojianghu','baidu','msn','souhu','tsouhu','buzz','s139','w51'],
               list:{
                
-                "tsina" : ["新浪微博","http://service.weibo.com/share/share.php?title={{T}}&url={{U}}&pic={{P}}&appkey=3175811782&ralateUid=2263058335&http://service.weibo.com/share/share.php?title=近日关于霍思燕黄奕两个女明星的隔空对骂新闻满天飞，俨然成为近期娱乐新闻的头条，那么霍思燕和黄奕瘦身各有什么妙招呢？下面动米网小编就跟大家一起来分享两位话题女星的瘦身绝招，帮助大家快速的瘦身减肥。&url=http%3A%2F%2Fwww.idongmi.com%2Fmxjs%2F20111101%2F1641.html&pic=http://www.idongmi.com/uploadfile/2011/1101/20111101095819417.jpg&appkey=3175811782&ralateUid=2263058335&searchPic=false"],
+                "tsina" : ["新浪微博","http://service.weibo.com/share/share.php?title={{T}}&url={{U}}&pic={{P}}&appkey=3175811782&ralateUid=2263058335&searchPic=false"],
 			          "taojianghu" : ["淘江湖","http://share.jianghu.taobao.com/share/addShare.htm?url={{U}}&title={{T}}&_input_charset=gbk"],
 			          "qzone" : ["QQ空间","http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url={{U}}&title={{T}}"],
 			          "tqq" : ["腾讯微博","http://v.t.qq.com/share/share.php?title={{T}}&url={{U}}&site=www.idongmi.com&pic={{P}}"],
