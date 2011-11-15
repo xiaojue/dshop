@@ -22,14 +22,14 @@
 			          "renren" : ["人人网","http://share.renren.com/share/buttonshare.do?link={{U}}&title={{T}}"],
 			          "kaixin" : ["开心网","http://www.kaixin001.com/repaste/bshare.php?rtitle={{T}}&URL={{U}}"],
 			          "baidu" : ["百度空间","http://apps.hi.baidu.com/share/?title={{T}}&url={{U}}"],
-			          "buzz" : ["谷歌buzz","http://www.google.com/buzz/post?hl=zh-CN&url={{U}}"],
+			          //"buzz" : ["谷歌buzz","http://www.google.com/buzz/post?hl=zh-CN&url={{U}}"],
 			          "souhu" : ["搜狐白社会","http://bai.sohu.com/share/blank/addbutton.do?title={{T}}&link={{U}}"],
 			          "s139" : ["139说客","http://wz.csdn.net/storeit.aspx?t={{T}}&u={{U}}"],
 			          "douban" : ["豆瓣","http://www.douban.com/recommend/?title={{T}}&url={{U}}&v=1&sel="],
 			          "tsouhu" : ["tsouhu","http://t.sohu.com/third/post.jsp?&url={{U}}&title={{T}}&content=utf-8&pic={{P}}"],
 			          "w51" : ["51","http://share.51.com/share/share.php?type=8&title={{T}}&vaddr={{U}}"]
               }
-            }
+            };
             if(cg) $.extend(_cg,cg);
             this.target=node;
             this.config=_cg;
@@ -40,7 +40,7 @@
               share.cssloaded=true;
             }
 
-        }
+          };
 
         share.cssloaded=false;
 
@@ -69,12 +69,12 @@
             that.draw(that.target);
             //针对腾讯微博做小窗口处理
             $('.tqq').live('click',function(){
-              var win=W.open($(this).attr('href'),'分享到腾讯微博','height=540,width=670,top=0,left=0,toolbar=no,menubar=no,scrollbars=no, resizable=no,location=no, status=no')  
-              if(win!=null) return false;
+                var win=W.open($(this).attr('href'),'分享到腾讯微博','height=540,width=670,top=0,left=0,toolbar=no,menubar=no,scrollbars=no, resizable=no,location=no, status=no');  
+              if(win!==null) return false;
             });
           }
-        }
+        };
         
         dshop.mods['share']=share;
     });
-})(window,jQuery)
+})(window,jQuery);
