@@ -38,7 +38,7 @@
             
           $('#J_SelectionShare').live('mousedown',function(){
               var text=that.getselectTxt();
-              if(text.length>100) text=text.slice(0,100); //截取120个字 
+              if(text.length>90) text=text.slice(0,90); //截取120个字 
               if(text){
                 $('#J_SelectionShare a').each(function(){
                     var newhref=$.trim($(this).attr('href').replace(/(title=)(.*?)(&|$)/gi,'$1'+text+'(具体内容请查看链接)'+'$3')).replace(/\n|\r/gi,'');

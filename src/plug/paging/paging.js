@@ -23,7 +23,7 @@
 				sizeclick: null,
 				wrap: null,
 				wrapid: '#J_Page' + new Date().valueOf() //创建的分页覆层div的id->只有get方法么有set方法 
-			}
+      };
 			$.extend(_cg, cg);
 			this.cg = _cg;
 		};
@@ -86,8 +86,7 @@
 				}
 				returnobject.n = n;
 				return returnobject;
-			},
-
+			}
 		};
 		//公开函数
 		paging.prototype = {
@@ -112,10 +111,10 @@
 					return false;
 				});
 			},
-			rebuild: function(count, current) {
+			rebuild: function(size, current) {
 				var that = this,
         cg=that.cg,      
-        count=Math.ceil(cg.count/cg.onepagesize),
+        count=Math.ceil(cg.size/cg.onepagesize),
 				pagobject = _fn.createtempobject(count, current, that.cg),
 				paghtml = dshop.mods.template.to_html(that.cg.template, pagobject);
 				$(that.cg.wrapid).html(paghtml);
@@ -139,5 +138,4 @@
 
 		dshop.mods['paging'] = paging;
 	});
-})(window, jQuery)
-
+})(window, jQuery);

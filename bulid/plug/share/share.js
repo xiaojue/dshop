@@ -14,7 +14,6 @@
               _cls:'J_Share',
               order:['tsina','qzone','tqq','renren','douban','kaixin','taojianghu','baidu','msn','souhu','tsouhu','buzz','s139','w51'],
               list:{
-               
                 "tsina" : ["新浪微博","http://service.weibo.com/share/share.php?title={{T}}&url={{U}}&pic={{P}}&appkey=3175811782&ralateUid=2263058335&searchPic=false"],
 			          "taojianghu" : ["淘江湖","http://share.jianghu.taobao.com/share/addShare.htm?url={{U}}&title={{T}}&_input_charset=gbk"],
 			          "qzone" : ["QQ空间","http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url={{U}}&title={{T}}"],
