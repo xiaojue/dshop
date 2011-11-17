@@ -114,7 +114,7 @@
 			rebuild: function(size, current) {
 				var that = this,
         cg=that.cg,      
-        count=Math.ceil(cg.size/cg.onepagesize),
+        count=Math.ceil(size/cg.onepagesize),
 				pagobject = _fn.createtempobject(count, current, that.cg),
 				paghtml = dshop.mods.template.to_html(that.cg.template, pagobject);
 				$(that.cg.wrapid).html(paghtml);
