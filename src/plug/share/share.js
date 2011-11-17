@@ -7,12 +7,12 @@
     dshop.add('share',function(){
         var share=function(node,cg){
             var _cg={
-              size:14,
+              size:13,
               pic:'',
               url:W.location.href,
               title:$('title').text(),
               _cls:'J_Share',
-              order:['tsina','qzone','tqq','renren','douban','kaixin','taojianghu','baidu','msn','souhu','tsouhu','buzz','s139','w51'],
+              order:['tsina','qzone','tqq','renren','douban','kaixin','taojianghu','baidu','msn','souhu','tsouhu','s139','w51'],
               list:{
                 "tsina" : ["新浪微博","http://service.weibo.com/share/share.php?title={{T}}&url={{U}}&pic={{P}}&appkey=3175811782&ralateUid=2263058335&searchPic=false"],
 			          "taojianghu" : ["淘江湖","http://share.jianghu.taobao.com/share/addShare.htm?url={{U}}&title={{T}}&_input_charset=gbk"],
@@ -22,7 +22,6 @@
 			          "renren" : ["人人网","http://share.renren.com/share/buttonshare.do?link={{U}}&title={{T}}"],
 			          "kaixin" : ["开心网","http://www.kaixin001.com/repaste/bshare.php?rtitle={{T}}&URL={{U}}"],
 			          "baidu" : ["百度空间","http://apps.hi.baidu.com/share/?title={{T}}&url={{U}}"],
-			          //"buzz" : ["谷歌buzz","http://www.google.com/buzz/post?hl=zh-CN&url={{U}}"],
 			          "souhu" : ["搜狐白社会","http://bai.sohu.com/share/blank/addbutton.do?title={{T}}&link={{U}}"],
 			          "s139" : ["139说客","http://wz.csdn.net/storeit.aspx?t={{T}}&u={{U}}"],
 			          "douban" : ["豆瓣","http://www.douban.com/recommend/?title={{T}}&url={{U}}&v=1&sel="],
