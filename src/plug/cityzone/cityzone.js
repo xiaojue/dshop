@@ -14,7 +14,7 @@
           $.extend(_config,config);
           
           this.config=_config;
-        }
+        };
 
         cityzone.prototype={
             init:function(){
@@ -47,8 +47,8 @@
                     if(cg.datasuccess) cg.datasuccess(that.city,that.zone);
                 });
             }
-        }
+          };
 
         dshop.mods['cityzone']=cityzone;
-    })
-})(window,jQuery)
+      });
+  })(window,jQuery);

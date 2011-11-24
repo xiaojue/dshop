@@ -45,7 +45,6 @@
 					if (current == startsize + i) temp.currentcls = currentcls;
 					arr.push(temp);
 				}
-
 				if (arr[0].text != 1) {
 					if (arr[0].text - 1 > 1) arr.unshift({
 						text: '..',

@@ -61,16 +61,22 @@
 
               Allstr+=dshop.mods.template.to_html(A,Aobj);
             }
-            $(target).addClass(cg._cls).html(Allstr);
+            $(target).html(Allstr);
           },
           init:function(){
             var that=this,cg=that.config;
             that.draw(that.target);
+            $(that.target).addClass(cg._cls);
             //针对腾讯微博做小窗口处理
             $('.tqq').live('click',function(){
                 var win=W.open($(this).attr('href'),'分享到腾讯微博','height=540,width=670,top=0,left=0,toolbar=no,menubar=no,scrollbars=no, resizable=no,location=no, status=no');  
               if(win!==null) return false;
             });
+          },
+          change:function(config){
+            var that=this;
+            $.extend(that.config,config);
+            that.draw(that.target);
           }
         };
         
