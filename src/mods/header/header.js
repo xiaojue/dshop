@@ -99,7 +99,7 @@
               W.location.href='/cart/cartlist';
             });
 					dshop.use('template', function() {
-						var html = '{{#s}}' + '<dl>' + '<dt><a href="/goods/{{goodsId}}"><img src="{{smallPicture}}" alt="{{goodsName}}" title="{{goodsName}}"></a></dt>' + '<dd>' + '<div><a class="gray1" href="/goods/{{goodsId}}">{{goodsName}}</a></div>' + '<div class="st"><a href="javascript:void(0)" data-cartid="{{id}}" class="J_CartDel">删除</a>¥<font>{{price}}</font></div>' + '</dd>' + '</dl>' + '{{/s}}' + '{{#hasGoods}}<div class="shop_set"><input type="button" class="mall" id="J_GoCart">购物车中共有 {{count}} 件商品{{/hasGoods}}{{^hasGoods}}购物车里什么也没有呢，快去随便逛逛？{{/hasGoods}}</div>';
+						var html = '{{#s}}' + '<dl>' + '<dt><a href="/goods/{{goodsId}}"><img src="{{smallPicture}}" alt="{{goodsName}}" title="{{goodsName}}"></a></dt>' + '<dd>' + '<div><a class="gray1" href="/goods/{{goodsId}}">{{goodsName}}</a></div>' + '<div class="st"><a href="javascript:void(0)" data-cartid="{{id}}" class="J_CartDel">删除</a>￥<font>{{price}}</font></div>' + '</dd>' + '</dl>' + '{{/s}}' + '{{#hasGoods}}<div class="shop_set"><input type="button" class="mall" id="J_GoCart">购物车中共有 {{count}} 件商品{{/hasGoods}}{{^hasGoods}}购物车里什么也没有呢，快去随便逛逛？{{/hasGoods}}</div>';
 						function inithandle() {
 							var setting = {
 								count: 0,

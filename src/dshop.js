@@ -88,7 +88,7 @@
 				})(modname, i);
 			}
 		}
-	}
+  };
 
 	var host = debug ? 'http://localhost/idmstatic/js/dshop/src/': 'http://s1.ifiter.com/idmstatic/js/dshop/bulid/',
 	dshop = new dependfix(host + 'plug/'),
