@@ -70,7 +70,7 @@
             $(that.target).addClass(cg._cls);
             //针对腾讯微博做小窗口处理
             $('.tqq').live('click',function(){
-                var win=W.open(url,'分享到腾讯微博','height=540,width=670,top=0,left=0,toolbar=no,menubar=no,scrollbars=no, resizable=no,location=no, status=no');  
+                var win=W.open($(this).attr('href'),'分享到腾讯微博','height=540,width=670,top=0,left=0,toolbar=no,menubar=no,scrollbars=no, resizable=no,location=no, status=no');  
               if(win!==null) return false;
             });
           },
