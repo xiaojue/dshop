@@ -20,7 +20,7 @@
 		this.mods = {};
 		this.host = host;
 		this.debug = debug;
-    this.KISSYLOAD=false;
+		this.KISSYLOAD = false;
 	};
 
 	dependfix.prototype = {
@@ -68,7 +68,7 @@
 								if (!that._queue[j]) {
 									that._queue[j] = that._queuefn[list[j]];
 								}
-                if(that._queue[j]) that._queue[j]();
+								if (that._queue[j]) that._queue[j]();
 							}
 							function checklist() {
 								for (var i = 0; i < list.length; i++) {
@@ -88,7 +88,7 @@
 				})(modname, i);
 			}
 		}
-  };
+	};
 
 	var host = debug ? 'http://localhost/idmstatic/js/dshop/src/': 'http://s1.ifiter.com/idmstatic/js/dshop/bulid/',
 	dshop = new dependfix(host + 'plug/'),
